@@ -4,10 +4,10 @@
 Jatt is an interactive database utility designed to bring users the latest sports statistics.
 
 ## Data Sources
-The data used to populate our player information can be found here:
+The data used to populate our player information can be found here:  
 https://www.kaggle.com/drgilermo/nba-players-stats#Seasons_Stats.csv
 
-The data used to populate our team information can be found here:
+The data used to populate our team information can be found here:  
 https://www.kaggle.com/mharvnek/nba-team-stats-00-to-18
 
 ## Creating the Database
