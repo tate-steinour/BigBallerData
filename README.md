@@ -1,7 +1,7 @@
 # Jatt
 
 ## About
-Jatt is an interactive database utility designed to bring users the latest sports statistics.
+Jatt is an interactive database utility designed to bring users the latest basketball statistics.
 
 ## Data Sources
 The data used to populate our player information can be found here:  
