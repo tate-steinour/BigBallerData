@@ -13,10 +13,10 @@ CREATE TABLE team_data (
   t_stl integer,
   t_blck integer,
   t_pf integer,
-  t_pfd integer,
+  t_pfd integer
   --PRIMARY KEY (t_id, t_season)
 );
-ALTER TABLE team_data OWNER TO jatt
+ALTER TABLE team_data OWNER TO jatt;
 COMMENT ON TABLE team_data IS 'NBA team statistics';
 
 
@@ -26,7 +26,7 @@ CREATE TABLE team_info (
   ti_name text,
   ti_location text
 );
-ALTER TABLE team_info OWNER TO jatt
+ALTER TABLE team_info OWNER TO jatt;
 COMMENT ON TABLE team_info IS 'information about NBA teams';
 
 
@@ -39,7 +39,7 @@ CREATE TABLE player_info (
   pi_yearEnd integer,
   pi_college text
 );
-ALTER TABLE player_info OWNER TO jatt
+ALTER TABLE player_info OWNER TO jatt;
 COMMENT ON TABLE player_info IS 'personal information about NBA players';
 
 
@@ -55,10 +55,10 @@ CREATE TABLE player_data (
   p_ast integer,
   p_tov integer,
   p_stl integer,
-  p_blck integer,
+  p_blck integer
   --PRIMARY KEY (p_id, p_teamid, p_season)
 );
-ALTER TABLE player_data OWNER TO jatt
+ALTER TABLE player_data OWNER TO jatt;
 COMMENT ON TABLE player_data IS 'NBA player statistics';
 
 
@@ -66,7 +66,7 @@ DROP TABLE IF EXISTS season;
 CREATE TABLE season (
   s_year integer PRIMARY KEY
 );
-ALTER TABLE season OWNER TO jatt
+ALTER TABLE season OWNER TO jatt;
 COMMENT ON TABLE season IS 'every season in the NBA starting at 2000';
 
 
