@@ -7,5 +7,8 @@ psql -c "COPY (
 	) TO STDOUT;" jatt | \
 	psql -c "COPY team_info FROM STDIN;" jatt
 
-echo COPY nba_teams FROM csv
+echo COPY team_data FROM csv
 psql -c "\copy team_data FROM nba_team_stats_00_to_18_edited.csv WITH CSV HEADER" jatt
+
+echo COPY player_data FROM csv
+psql -c "\copy player_data FROM Seasons_Stats_edited.csv WITH CSV HEADER" jatt

@@ -48,10 +48,14 @@ COMMENT ON TABLE player_info IS 'personal information about NBA players';
 DROP TABLE IF EXISTS player_data;
 CREATE TABLE player_data (
   p_id integer,
-  p_teamid integer,
+  p_name text,
+  p_teamid text,
   p_season integer,
-  p_ppg integer,
+  p_pos text,
+  p_pts integer,
+  p_fg integer,
   p_3ptm integer,
+  p_2ptm integer,
   p_ftm integer,
   p_reb integer,
   p_ast integer,
