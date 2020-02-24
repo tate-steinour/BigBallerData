@@ -1,19 +1,21 @@
 DROP TABLE IF EXISTS team_data;
 CREATE TABLE team_data (
-  t_id integer,
-  t_season integer,
+  t_id integer,  
+  t_name text,
+  t_season text,
   t_wins integer,
   t_losses integer,
-  t_ppg integer,
-  t_3ptm integer,
-  t_ftm integer,
-  t_reb integer,
-  t_ast integer,
-  t_tov integer,
-  t_stl integer,
-  t_blck integer,
-  t_pf integer,
-  t_pfd integer
+  t_pts real,
+  t_fgm real,
+  t_3ptm real,
+  t_ftm real,
+  t_reb real,
+  t_ast real,
+  t_tov real,
+  t_stl real,
+  t_blck real,
+  t_pf real,
+  t_pfd real
   --PRIMARY KEY (t_id, t_season)
 );
 ALTER TABLE team_data OWNER TO jatt;
