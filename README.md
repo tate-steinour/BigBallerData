@@ -1,5 +1,4 @@
 # Jatt
-Team J.A.T.T.
 
 ## About
 Jatt is an interactive database utility designed to bring users the latest sports statistics.
@@ -20,23 +19,23 @@ To create the database:
 
 3. To create the initial schema, run the "create.sql" file like so:
 
-    psql -h data.cs.jmu.edu jatt < create.sql
+    $ psql -h data.cs.jmu.edu jatt < create.sql
 
 4. After the schema has been created, run "copy.sh" to generate the copy instructions for Postgres:
 
-    ./copy.sh
+    $ ./copy.sh
 
 5. To copy the data into the database, run the following command with the newly generated "stats.sql" file:
 
-    psql -h data.cs.jmu.edu jatt < stats.sql
+    $ psql -h data.cs.jmu.edu jatt < stats.sql
 
 6. To enforce the primary and foreign key constraints on the database, run the following command:
 
-    psql -h data.cs.jmu.edu jatt < alter.sql
+    $ psql -h data.cs.jmu.edu jatt < alter.sql
 
 7. To help speed up queries, run the index SQL script:
 
-    psql -h data.cs.jmu.edu jatt < index.sql
+    $ psql -h data.cs.jmu.edu jatt < index.sql
 
 
 
