@@ -4,18 +4,20 @@
 Jatt is an interactive database utility designed to bring users the latest basketball statistics.
 
 ## Data Sources
-The data used to populate our player information can be found here:  
+The original data used to populate our player information can be found here:  
 https://www.kaggle.com/drgilermo/nba-players-stats#Seasons_Stats.csv
 
 The data used to populate our team information can be found here:  
 https://www.kaggle.com/mharvnek/nba-team-stats-00-to-18
+
+Note: The CSVs are slightly modified from their source to better align with our schema and allow for easy copying.
 
 ## Creating the Database
 To create the database:
 
 1. Ensure that a Postgres database has been created at the desired location (e.g using the command "createdb jatt").
 
-2. Ensure that the CSVs from Kaggle listed above are located the working directory (they should be included in the repository by default).
+2. Ensure that the modified CSVs from Kaggle listed above are located the working directory.
 
 3. To create the initial schema, run the "create.sql" file like so:
 
