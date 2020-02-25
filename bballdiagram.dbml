@@ -1,0 +1,55 @@
+Table team_data {
+  t_id integer [pk]
+  t_season integer [pk]
+  t_wins integer
+  t_losses integer
+  t_ppg integer
+  t_3ptm integer
+  t_ftm integer
+  t_reb integer
+  t_ast integer
+  t_tov integer
+  t_stl integer
+  t_blck integer
+  t_pf integer
+  t_pfd integer
+}
+
+Table team_info {
+  ti_id integer [pk]
+  ti_name text
+  ti_location text
+}
+
+Table player_info {
+  pi_id integer [pk]
+  pi_name text 
+  pi_position text
+  pi_yearStart integer
+  pi_yearEnd integer
+  pi_college text
+}
+
+Table player_data {
+  p_id integer [pk]
+  p_teamid integer [pk]
+  p_season integer [pk]
+  p_ppg integer
+  p_3ptm integer
+  p_ftm integer
+  p_reb integer
+  p_ast integer
+  p_tov integer
+  p_stl integer
+  p_blck integer
+}
+
+Table season {
+  s_year integer [pk]
+}
+
+Ref: team_info.ti_id - team_data.t_id
+Ref: team_data.t_season - season.s_year
+Ref: team_data.t_id - player_data.p_teamid
+Ref: season.s_year - player_data.p_season
+Ref: player_data.p_id - player_info.pi_id
