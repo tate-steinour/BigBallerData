@@ -25,19 +25,25 @@ To create the database:
     $ ./copy.sh
     ```
 
-5. To verify that the copy has completed successfully, run the following command with the newly generated "stats.sql" file:
+5. Copy data from the first two tables into team_info and player_info then drop redundant columns from team_data and player_data by running:
+    ```
+    $ psql -h data.cs.jmu.edu jatt < transfer.sql
+    ```
+
+
+6. To verify that the copy has completed successfully, run the following command with the newly generated "stats.sql" file:
 
     ```
     $ psql -h data.cs.jmu.edu jatt < stats.sql
     ```
 
-6. To enforce the primary and foreign key constraints on the database, run the following command:
+7. To enforce the primary and foreign key constraints on the database, run the following command:
 
     ```
     $ psql -h data.cs.jmu.edu jatt < alter.sql
     ```
 
-7. To help speed up queries, run the index SQL script:
+8. To help speed up queries, run the index SQL script:
 
     ```
     $ psql -h data.cs.jmu.edu jatt < index.sql
