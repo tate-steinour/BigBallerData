@@ -25,7 +25,7 @@ COMMENT ON TABLE team_data IS 'NBA team statistics';
 DROP TABLE IF EXISTS team_info;
 CREATE TABLE team_info (
   ti_id integer PRIMARY KEY,
-  ti_name text,
+  ti_name text
 );
 ALTER TABLE team_info OWNER TO jatt;
 COMMENT ON TABLE team_info IS 'information about NBA teams';
