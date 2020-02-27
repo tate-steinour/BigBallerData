@@ -20,12 +20,12 @@ To create the database:
     $ psql -h data.cs.jmu.edu jatt < create.sql
     ```
 
-4. After the schema has been created, run "copy.sh" to generate the copy instructions for Postgres:
+4. After the schema has been created, run "copy.sh" to copy the CSV data into the database:
     ```
     $ ./copy.sh
     ```
 
-5. To copy the data into the database, run the following command with the newly generated "stats.sql" file:
+5. To verify that the copy has completed successfully, run the following command with the newly generated "stats.sql" file:
 
     ```
     $ psql -h data.cs.jmu.edu jatt < stats.sql
