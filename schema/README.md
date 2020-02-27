@@ -1,8 +1,3 @@
-# Jatt
-
-## About
-Jatt is an interactive database utility designed to bring users the latest basketball statistics.
-
 ## Data Sources
 The original data used to populate our player information can be found here:  
 https://www.kaggle.com/drgilermo/nba-players-stats#Seasons_Stats.csv
