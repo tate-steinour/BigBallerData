@@ -12,7 +12,8 @@ DROP COLUMN t_name;
 
 INSERT INTO season(s_year)
 SELECT DISTINCT p_season
-FROM player_data;
+FROM player_data
+ORDER BY p_season;
 
 --This is to transfer player data
 INSERT INTO player_info(pi_id, pi_name, pi_position)
@@ -20,4 +21,7 @@ SELECT p_id, p_name, p_pos
 FROM player_data;
 
 ALTER TABLE player_data
-DROP COLUMN p_name, p_pos;
+DROP COLUMN p_name;
+
+ALTER TABLE player_data
+DROP COLUMN p_pos;
