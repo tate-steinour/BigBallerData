@@ -68,4 +68,4 @@ CREATE TABLE player_stats (
   --PRIMARY KEY (p_id, p_teamid, p_season)
 );
 ALTER TABLE player_stats OWNER TO jatt;
-COMMENT ON TABLE player_data IS 'NBA player statistics';
+COMMENT ON TABLE player_stats IS 'NBA player statistics';
