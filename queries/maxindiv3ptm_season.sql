@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS max_individual_3ptm;
 CREATE VIEW max_individual_3ptm AS
     SELECT DISTINCT t_name, ps_season, ps_name, ps_3ptm
     FROM player_stats

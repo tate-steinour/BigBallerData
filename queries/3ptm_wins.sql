@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS three_ptm_wins;
 CREATE VIEW three_ptm_wins AS
     SELECT t_name, ts_season, ts_3ptm
     FROM team_stats

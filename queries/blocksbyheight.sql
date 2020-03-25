@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS blocks_by_height;
 CREATE VIEW blocks_by_height AS
     SELECT DISTINCT t_name, ps_season, ps_name, ps_blck, p_height
     FROM player_stats

@@ -1,3 +1,4 @@
+DROP VIEW IF EXISTS players_by_college;
 CREATE VIEW players_by_college AS
     SELECT DISTINCT p_name, ps_games, ps_season, t_name
     FROM player
