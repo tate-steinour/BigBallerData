@@ -25,8 +25,11 @@ Table player {
   p_id integer [pk]
   p_name text
   p_position text
-  p_yearStart integer
-  p_yearEnd integer
+  p_yearstart integer
+  p_yearend integer
+  p_height text
+  p_weight integer
+  p_birthdate text
   p_college text
 }
 
@@ -34,7 +37,8 @@ Table player_stats {
   ps_id integer [pk]
   ps_teamid integer [pk]
   ps_season integer [pk]
-  ps_gp integer
+  ps_pos text
+  ps_games integer
   ps_pts integer
   ps_fg integer
   ps_3ptm integer
