@@ -22,7 +22,7 @@ ALTER TABLE team_stats OWNER TO jatt;
 COMMENT ON TABLE team_stats IS 'NBA team statistics';
 
 
-DROP TABLE IF EXISTS team;
+DROP TABLE IF EXISTS team CASCADE;
 CREATE TABLE team (
   t_id integer PRIMARY KEY,
   t_name text
@@ -34,7 +34,7 @@ COMMENT ON TABLE team IS 'information about NBA teams';
 DROP TABLE IF EXISTS player;
 CREATE TABLE player (
 --  p_id integer PRIMARY KEY,
-  p_name text PRIMARY KEY,
+  p_name text,-- PRIMARY KEY,
   p_yearStart integer,
   p_yearEnd integer,
   p_position text,
