@@ -37,7 +37,7 @@ CREATE TABLE player (
   p_name text PRIMARY KEY,
   p_yearStart integer,
   p_yearEnd integer,
-  p_position integer,
+  p_position text,
   p_height text,
   p_weight integer,
   p_birthdate text,
