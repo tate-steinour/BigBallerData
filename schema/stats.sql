@@ -1,15 +1,11 @@
-ANALYZE VERBOSE player_data;
-SELECT count(*) AS pd_cnt FROM player_data;
+ANALYZE VERBOSE player_stats;
+SELECT count(*) AS ps_cnt FROM player_stats;
 
-ANALYZE VERBOSE team_data;
-SELECT count(*) AS td_cnt FROM team_data;
+ANALYZE VERBOSE team_stats;
+SELECT count(*) AS ts_cnt FROM team_stats;
 
-ANALYZE VERBOSE season;
-SELECT count(*) AS s_cnt FROM season;
+ANALYZE VERBOSE team;
+SELECT count(*) AS t_cnt FROM team;
 
-ANALYZE VERBOSE team_info;
-SELECT count(*) AS ti_cnt FROM team_info;
-
-ANALYZE VERBOSE player_info;
-SELECT count(*) AS pi_cnt FROM player_info;
-
+ANALYZE VERBOSE player;
+SELECT count(*) AS p_cnt FROM player;
