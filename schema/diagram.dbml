@@ -1,55 +1,53 @@
-Table team_data {
+Table team_stats {
+  ts_id integer [pk]
+  ts_season text [pk]
+  ts_wins integer
+  ts_losses integer
+  ts_pts real
+  ts_fgm real
+  ts_3ptm real
+  ts_ftm real
+  ts_reb real
+  ts_ast real
+  ts_tov real
+  ts_stl real
+  ts_blck real
+  ts_pf real
+  ts_pfd real
+}
+
+Table team {
   t_id integer [pk]
-  t_season integer [pk]
-  t_wins integer
-  t_losses integer
-  t_ppg integer
-  t_3ptm integer
-  t_ftm integer
-  t_reb integer
-  t_ast integer
-  t_tov integer
-  t_stl integer
-  t_blck integer
-  t_pf integer
-  t_pfd integer
+  t_name text
 }
 
-Table team_info {
-  ti_id integer [pk]
-  ti_name text
-  ti_location text
-}
-
-Table player_info {
-  pi_id integer [pk]
-  pi_name text 
-  pi_position text
-  pi_yearStart integer
-  pi_yearEnd integer
-  pi_college text
-}
-
-Table player_data {
+Table player {
   p_id integer [pk]
-  p_teamid integer [pk]
-  p_season integer [pk]
-  p_ppg integer
-  p_3ptm integer
-  p_ftm integer
-  p_reb integer
-  p_ast integer
-  p_tov integer
-  p_stl integer
-  p_blck integer
+  p_name text
+  p_position text
+  p_yearStart integer
+  p_yearEnd integer
+  p_college text
 }
 
-Table season {
-  s_year integer [pk]
+Table player_stats {
+  ps_id integer [pk]
+  ps_teamid integer [pk]
+  ps_season integer [pk]
+  ps_gp integer
+  ps_pts integer
+  ps_fg integer
+  ps_3ptm integer
+  ps_2ptm integer
+  ps_ftm integer
+  ps_reb integer
+  ps_ast integer
+  ps_tov integer
+  ps_stl integer
+  ps_blck integer
 }
 
-Ref: team_info.ti_id - team_data.t_id
-Ref: team_data.t_season - season.s_year
-Ref: team_data.t_id - player_data.p_teamid
-Ref: season.s_year - player_data.p_season
-Ref: player_data.p_id - player_info.pi_id
+Ref: team.t_id - team_stats.ts_id
+Ref: team_stats.ts_id - player_stats.ps_teamid
+Ref: player_stats.ps_id - player.p_id
+Ref: player_stats.ps_season - team_stats.ts_season
