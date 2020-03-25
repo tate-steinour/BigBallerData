@@ -12,7 +12,7 @@ To create the database:
 
 1. Ensure that a Postgres database has been created at the desired location (e.g using the command "createdb jatt").
 
-2. Ensure that the modified CSVs from Kaggle listed above are located the working directory.
+2. Ensure that the modified CSVs from Kaggle listed above are located the working directory. At this point, the rest of the database can be easily configured by running the "run.sh" script in the schema directory. Otherwise, the step-by-step process is as follows:
 
 3. To create the initial schema, run the "create.sql" file like so:
 
