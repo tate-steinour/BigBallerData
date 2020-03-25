@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS team_stats;
 CREATE TABLE team_stats (
   ts_id integer,
+  ts_name text,
   ts_season text,
   ts_wins integer,
   ts_losses integer,
