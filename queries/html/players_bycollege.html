@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>philly_team_pts</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+
+<h3>Query</h3>
+
+<pre>
+  DROP VIEW IF EXISTS players_by_college;
+  CREATE VIEW players_by_college AS
+      SELECT DISTINCT p_name, ps_games, ps_season, t_name
+      FROM player
+          JOIN player_stats ON p_name=ps_name
+          JOIN team_stats ON ps_teamid=ts_id
+          JOIN team ON ts_id=t_id
+      WHERE p_college='Virginia Commonwealth University'
+      ORDER BY ps_season DESC;
+      LIMIT 10;
+</pre>
+
+
+<h3>Table</h3>
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg" style="undefined;table-layout: fixed; width: 552px">
+<colgroup>
+<col style="width: 130px">
+<col style="width: 56px">
+<col style="width: 213px">
+<col style="width: 153px">
+</colgroup>
+  <tr>
+    <th class="tg-0lax">Name</th>
+    <th class="tg-0pky">GP</th>
+    <th class="tg-0pky">Team</th>
+    <th class="tg-0pky">Season</th>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Briante Weber</td>
+    <td class="tg-0lax">7</td>
+    <td class="tg-0lax">Golden State Warriors</td>
+    <td class="tg-0lax">2017</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Briante Weber</td>
+    <td class="tg-0lax">13</td>
+    <td class="tg-0lax">Charlotte Hornets</td>
+    <td class="tg-0lax">2017</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Larry Sanders</td>
+    <td class="tg-0lax">5</td>
+    <td class="tg-0lax">Cleveland Cavaliers</td>
+    <td class="tg-0lax">2017</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Treveon Graham</td>
+    <td class="tg-0lax">27</td>
+    <td class="tg-0lax">Charlotte Hornets</td>
+    <td class="tg-0lax">2017</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Troy Daniels</td>
+    <td class="tg-0lax">67</td>
+    <td class="tg-0lax">Memphis Grizzlies</td>
+    <td class="tg-0lax">2017</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Briante Weber</td>
+    <td class="tg-0lax">1</td>
+    <td class="tg-0lax">Miami Heat</td>
+    <td class="tg-0lax">2016</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Briante Weber</td>
+    <td class="tg-0lax">6</td>
+    <td class="tg-0lax">Memphis Grizzlies</td>
+    <td class="tg-0lax">2016</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Troy Daniels</td>
+    <td class="tg-0lax">43</td>
+    <td class="tg-0lax">Charlotte Hornets</td>
+    <td class="tg-0lax">2016</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Larry Sanders</td>
+    <td class="tg-0pky">27</td>
+    <td class="tg-0pky">Milwaukee Bucks</td>
+    <td class="tg-0pky">2015</td>
+  </tr>
+</table>
+
+
+<h3>Chart</h3>
+
+<head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Player');
+        data.addColumn('number', 'Games Played');
+        data.addRows([
+          ['Briante Weber-Golden State Warriors-2017', 7],
+          ['Briante Weber-Charlotte Hornets-2017', 13],
+          ['Larry Sanders-Cleveland Cavaliers-2017', 5],
+          ['Treveon Graham-Charlotte Hornets-2017', 27],
+          ['Troy Daniels-Memphis Grizzlies-2017', 67],
+          ['Briante Weber-Miami Heat-2016', 1],
+          ['Briante Weber-Memphis Grizzlies-2016', 6],
+          ['Troy Daniels-Charlotte Hornets-2016', 43],
+          ['Larry Sanders-Milwaukee Bucks-2015', 27]
+        ]);
+
+        // Set chart options
+        var options = {'title':'VCU Players in the NBA',
+                       'width':400,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+
+  <body>
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div>
+  </body>
+</html>

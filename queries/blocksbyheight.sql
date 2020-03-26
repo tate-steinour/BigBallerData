@@ -6,6 +6,7 @@ CREATE VIEW blocks_by_height AS
         JOIN team ON t_id=ts_id
         JOIN player ON ps_name=p_name
     WHERE ps_blck >= 1
-    ORDER BY ps_blck DESC;
+    ORDER BY ps_blck DESC
     LIMIT 10;
+
 SELECT * FROM blocks_by_height;
