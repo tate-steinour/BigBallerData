@@ -9,9 +9,9 @@
 <h3>Query</h3>
 
 <pre>
-SELECT t_name, ts_season, ts_3ptm
+SELECT t_name, ts_season, ts_3ptm, ts_wins
 FROM team_stats
-    JOIN team on t_id=ts_id
+  JOIN team on t_id=ts_id
 WHERE ts_wins >= 50
 ORDER BY ts_3ptm DESC
 LIMIT 10;
