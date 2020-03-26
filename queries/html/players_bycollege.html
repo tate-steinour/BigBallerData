@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>philly_team_pts</title>
+    <title>Players by College</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
@@ -9,16 +9,14 @@
 <h3>Query</h3>
 
 <pre>
-  DROP VIEW IF EXISTS players_by_college;
-  CREATE VIEW players_by_college AS
-      SELECT DISTINCT p_name, ps_games, ps_season, t_name
-      FROM player
-          JOIN player_stats ON p_name=ps_name
-          JOIN team_stats ON ps_teamid=ts_id
-          JOIN team ON ts_id=t_id
-      WHERE p_college='Virginia Commonwealth University'
-      ORDER BY ps_season DESC;
-      LIMIT 10;
+  SELECT DISTINCT p_name, ps_games, ps_season, t_name
+  FROM player
+      JOIN player_stats ON p_name=ps_name
+      JOIN team_stats ON ps_teamid=ts_id
+      JOIN team ON ts_id=t_id
+  WHERE p_college='Virginia Commonwealth University'
+  ORDER BY ps_season DESC;
+  LIMIT 10;
 </pre>
 
 

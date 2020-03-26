@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blocks by Height</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+
+<h3>Query</h3>
+
+<pre>
+  SELECT DISTINCT t_name, ps_season, ps_name, ps_blck, p_height
+  FROM player_stats
+      JOIN team_stats ON ps_teamid=ts_id
+      JOIN team ON t_id=ts_id
+      JOIN player ON ps_name=p_name
+  WHERE ps_blck >= 1
+  ORDER BY ps_blck DESC
+  LIMIT 10;
+</pre>
+
+
+<h3>Table</h3>
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg" style="undefined;table-layout: fixed; width: 443px">
+<colgroup>
+<col style="width: 144px">
+<col style="width: 61px">
+<col style="width: 85px">
+<col style="width: 153px">
+</colgroup>
+  <tr>
+    <th class="tg-0lax">Name</th>
+    <th class="tg-0pky">Blocks</th>
+    <th class="tg-0pky">Height</th>
+    <th class="tg-0pky">Season</th>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Marcus Camby</td>
+    <td class="tg-0lax">285</td>
+    <td class="tg-0lax">6'11</td>
+    <td class="tg-0lax">2008</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Ben Wallace</td>
+    <td class="tg-0lax">278</td>
+    <td class="tg-0lax">6'9</td>
+    <td class="tg-0lax">2002</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Hassan Whiteside</td>
+    <td class="tg-0lax">269</td>
+    <td class="tg-0lax">7'0</td>
+    <td class="tg-0lax">2016</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Theo Ratliff</td>
+    <td class="tg-0lax">262</td>
+    <td class="tg-0lax">6'10</td>
+    <td class="tg-0lax">2003</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Ben Wallace</td>
+    <td class="tg-0lax">246</td>
+    <td class="tg-0lax">6'9</td>
+    <td class="tg-0lax">2004</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Serge Ibaka</td>
+    <td class="tg-0lax">242</td>
+    <td class="tg-0lax">6'10</td>
+    <td class="tg-0lax">2013</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Serge Ibaka</td>
+    <td class="tg-0lax">241</td>
+    <td class="tg-0lax">6'10</td>
+    <td class="tg-0lax">2012</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Tim Duncan</td>
+    <td class="tg-0lax">237</td>
+    <td class="tg-0lax">6'11</td>
+    <td class="tg-0lax">2003</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Marcus Camby</td>
+    <td class="tg-0pky">231</td>
+    <td class="tg-0pky">6'11</td>
+    <td class="tg-0pky">2007</td>
+  </tr>
+</table>
+
+
+<h3>Chart</h3>
+
+<head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Player with Height');
+        data.addColumn('number', 'Blocks');
+        data.addRows([
+          ['Marcus Camby 6-11', 285],
+          ['Ben Wallace 6-9', 278],
+          ['Hassan Whiteside 7-0', 269],
+          ['Theo Ratliff 6-10', 262],
+          ['Ben Wallace 6-9', 246],
+          ['Serge Ibaka 6-10', 242],
+          ['Serge Ibaka 6-10', 241],
+          ['Tim Duncan 6-11', 237],
+          ['Marcus Camby 6-11', 231]
+        ]);
+
+        // Set chart options
+        var options = {'title':'Height of Top ShotBlockers',
+                       'width':400,
+                       'height':300};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+
+  <body>
+    <!--Div that will hold the pie chart-->
+    <div id="chart_div"></div>
+  </body>
+</html>
