@@ -8,5 +8,6 @@ CREATE VIEW philly_team_pts AS
         JOIN team ON t_id=ts_id
     WHERE t_name='Philadelphia 76ers'
     ORDER BY ts_season;
+ALTER VIEW philly_team_pts OWNER TO jatt;
 
-SELECT * FROM philly_team_pts;
+--SELECT * FROM philly_team_pts;
