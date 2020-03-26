@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MaxInDiv3ptm_Season</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+
+<h3>Query</h3>
+
+<pre>
+    SELECT DISTINCT t_name, ps_season, ps_name, ps_3ptm
+    FROM player_stats
+        JOIN team_stats ON ps_teamid=ts_id
+        JOIN team ON t_id=ts_id
+    WHERE ps_3ptm >= 150
+    ORDER BY ps_3ptm DESC
+	LIMIT 10;
+</pre>
+
+<h3>Table</h3>
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+    <tr>
+    <th>Team Name</th>
+    <th>Season</th>
+    <th>Player Name</th>
+    <th>3 Pointers Scored</th>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Golden State Warriors</td>
+    <td class="tg-0pky">2016</td>
+    <td class="tg-0pky">Stephen Curry</td>
+    <td class="tg-0pky">402</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Golden State Warriors</td>
+    <td class="tg-0pky">2017</td>
+    <td class="tg-0pky">Stephen Curry</td>
+    <td class="tg-0pky">324</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Golden State Warriors</td>
+    <td class="tg-0pky">2015</td>
+    <td class="tg-0pky">Stephen Curry</td>
+    <td class="tg-0pky">286</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Golden State Warriors</td>
+    <td class="tg-0pky">2016</td>
+    <td class="tg-0pky">Klay Thompson</td>
+    <td class="tg-0pky">276</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Golden State Warriors</td>
+    <td class="tg-0pky">2013</td>
+    <td class="tg-0pky">Stephen Curry</td>
+    <td class="tg-0pky">272</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Oklahoma City Thunder</td>
+    <td class="tg-0pky">2006</td>
+    <td class="tg-0pky">Ray Allen</td>
+    <td class="tg-0pky">269</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Golden State Warriors</td>
+    <td class="tg-0pky">2017</td>
+    <td class="tg-0pky">Klay Thompson</td>
+    <td class="tg-0pky">268</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Houston Rockets</td>
+    <td class="tg-0pky">2017</td>
+    <td class="tg-0pky">James Harden</td>
+    <td class="tg-0pky">262</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Golden State Warriors</td>
+    <td class="tg-0pky">2014</td>
+    <td class="tg-0pky">Stephen Curry</td>
+    <td class="tg-0pky">261</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Houston Rockets</td>
+    <td class="tg-0pky">2017</td>
+    <td class="tg-0pky">Eric Gordon</td>
+    <td class="tg-0pky">246</td>
+    </tr>
+</table>
+
+<h3>Chart</h3>
+
+<div id="linechart" sytle="width: 100%;"></div>
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+        ['Season', 'Wins'],
+        ['2000-01', 50],
+        ['2001-02', 36],
+        ['2002-03', 44],
+        ['2003-04', 29],
+        ['2004-05', 62],
+        ['2005-06', 54],
+        ['2006-07', 61],
+        ['2007-08', 55],
+        ['2008-09', 41],
+        ['2009-10', 27],
+        ['2010-11', 41],
+        ['2011-12', 35],
+        ['2012-13', 34],
+        ['2013-14', 19],
+        ['2014-15', 18],
+        ['2015-16', 10],
+        ['2016-17', 28],
+        ['2017-18', 52],
+        ['2018-19', 51]
+    ]);
+
+    var options = {
+        title: 'Philadelphia 76ers Wins From 2000-01 to 2018-19',
+        curveType: 'function',
+        legend: { position: 'bottom' }
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('linechart'));
+
+    chart.draw(data, options);
+    }
+</script>
+
+</body>
+</html>
