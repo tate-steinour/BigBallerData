@@ -9,14 +9,14 @@
 <h3>Query</h3>
 
 <pre>
-  SELECT DISTINCT p_name, ps_games, ps_season, t_name
-  FROM player
-      JOIN player_stats ON p_name=ps_name
-      JOIN team_stats ON ps_teamid=ts_id
-      JOIN team ON ts_id=t_id
-  WHERE p_college='Virginia Commonwealth University'
-  ORDER BY ps_season DESC;
-  LIMIT 10;
+SELECT DISTINCT p_name, ps_games, ps_season, t_name
+FROM player
+    JOIN player_stats ON p_name=ps_name
+    JOIN team_stats ON ps_teamid=ts_id
+    JOIN team ON ts_id=t_id
+WHERE p_college='Virginia Commonwealth University'
+ORDER BY ps_season DESC
+LIMIT 10;
 </pre>
 
 
@@ -135,8 +135,8 @@
 
         // Set chart options
         var options = {'title':'VCU Players in the NBA',
-                       'width':400,
-                       'height':300};
+                       'width':888,
+                       'height':666};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
