@@ -1,3 +1,6 @@
+--Able to see how many games were played in the NBA by players
+--from specific colleges
+
 DROP VIEW IF EXISTS players_by_college;
 CREATE VIEW players_by_college AS
     SELECT DISTINCT p_name, ps_games, ps_season, t_name
@@ -8,5 +11,5 @@ CREATE VIEW players_by_college AS
     WHERE p_college='Virginia Commonwealth University'
     ORDER BY ps_season DESC
     LIMIT 10;
-    
+
 SELECT * FROM players_by_college;

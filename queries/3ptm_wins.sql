@@ -1,3 +1,6 @@
+--Observes the number of 3 pointers made by the top teams
+--from each season 
+
 DROP VIEW IF EXISTS three_ptm_wins;
 CREATE VIEW three_ptm_wins AS
     SELECT t_name, ts_season, ts_3ptm

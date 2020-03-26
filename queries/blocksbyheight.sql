@@ -1,3 +1,6 @@
+--Analyzes the relation between the top shotblockers from each season
+--and their heights
+
 DROP VIEW IF EXISTS blocks_by_height;
 CREATE VIEW blocks_by_height AS
     SELECT DISTINCT t_name, ps_season, ps_name, ps_blck, p_height
