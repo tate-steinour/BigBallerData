@@ -97,46 +97,30 @@
 
 <h3>Chart</h3>
 
-<div id="linechart" sytle="width: 100%;"></div>
+<div id="piechart" style="width: 500px; height: 300px;"></div>
 
 <script type="text/javascript">
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
 
-    function drawChart() {
     var data = google.visualization.arrayToDataTable([
-        ['Season', 'Wins'],
-        ['2000-01', 50],
-        ['2001-02', 36],
-        ['2002-03', 44],
-        ['2003-04', 29],
-        ['2004-05', 62],
-        ['2005-06', 54],
-        ['2006-07', 61],
-        ['2007-08', 55],
-        ['2008-09', 41],
-        ['2009-10', 27],
-        ['2010-11', 41],
-        ['2011-12', 35],
-        ['2012-13', 34],
-        ['2013-14', 19],
-        ['2014-15', 18],
-        ['2015-16', 10],
-        ['2016-17', 28],
-        ['2017-18', 52],
-        ['2018-19', 51]
+      ["Name", "Count"],
+      ["Stephen Curry (GSW)", 5],
+      ["Klay Thompson (GSW)", 2],
+      ["Ray Allen (OKC)", 1],
+      ["James Harden (HOU)", 1],
+      ["Eric Gordon (HOU)", 1]
     ]);
 
     var options = {
-        title: 'Philadelphia 76ers Wins From 2000-01 to 2018-19',
-        curveType: 'function',
-        legend: { position: 'bottom' }
+      chartArea: {width:'90%', height:'90%'},
     };
 
-    var chart = new google.visualization.LineChart(document.getElementById('linechart'));
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
     chart.draw(data, options);
-    }
+  }
 </script>
 
 </body>
