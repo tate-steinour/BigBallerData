@@ -11,5 +11,6 @@ CREATE VIEW players_by_college AS
     WHERE p_college='Virginia Commonwealth University'
     ORDER BY ps_season DESC
     LIMIT 10;
+ALTER VIEW players_by_college OWNER TO jatt;
 
-SELECT * FROM players_by_college;
+--SELECT * FROM players_by_college;

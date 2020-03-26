@@ -9,5 +9,5 @@ CREATE VIEW three_ptm_wins AS
     WHERE ts_wins >= 50
     ORDER BY ts_3ptm DESC
     LIMIT 10;
-
-SELECT * FROM three_ptm_wins;
+ALTER VIEW three_ptm_wins OWNER TO jatt;
+--SELECT * FROM three_ptm_wins;

@@ -9,5 +9,6 @@ CREATE VIEW max_individual_3ptm AS
     WHERE ps_3ptm >= 150
     ORDER BY ps_3ptm DESC
     LIMIT 10;
+ALTER VIEW max_individual_3ptm OWNER TO jatt;
 
-SELECT * FROM max_individual_3ptm;
+--SELECT * FROM max_individual_3ptm;
