@@ -46,6 +46,8 @@ LIMIT 10;
 
 <h3>Chart</h3>
 
+
+
 <div id="chart_div" style="width: 900px; height: 500px;"></div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -54,7 +56,12 @@ LIMIT 10;
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
-        var data = google.visualization.arrayToDataTable({{dat}});
+        var data = google.visualization.arrayToDataTable([
+          ['3 Pointers', 'Wins'],
+        {% for row in cur %}
+          [ {{row[2]}},  {{row[3]}}],
+        {% endfor %}
+        ]);
 
         var options = {
           title: 'Avg. 3 Pointers vs. Total Wins',
