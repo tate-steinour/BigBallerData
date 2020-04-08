@@ -8,14 +8,6 @@
 
 <h3>Query</h3>
 
-<pre>
-SELECT t_name, ts_season, ts_3ptm, ts_wins
-FROM team_stats
-  JOIN team on t_id=ts_id
-WHERE ts_wins >= 50
-ORDER BY ts_3ptm DESC
-LIMIT 10;
-</pre>
 
 <h3>Table</h3>
 
@@ -58,7 +50,7 @@ LIMIT 10;
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['3 Pointers', 'Wins'],
-        {% for row in cur %}
+        {% for row in dat %}
           [ {{row[2]}},  {{row[3]}}],
         {% endfor %}
         ]);
