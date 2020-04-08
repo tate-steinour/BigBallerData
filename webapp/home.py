@@ -37,3 +37,36 @@ def get_blocks():
         cursor.execute(sql, (minHeight, maxHeight, limit))
         queuryData = cursor.fetchall()
         return render_template('blocks_by_height.html', queuryData = queuryData)
+
+@app.route('/three_ptm_wins')
+def populate():
+
+    sql = """
+    SELECT t_name, ts_season, ts_3ptm, ts_wins
+    FROM team_stats
+        JOIN team on t_id=ts_id
+    WHERE ts_wins >= %s
+        AND ts_season > %s
+		AND ts_season < %s
+    ORDER BY ts_3ptm DESC
+    LIMIT %s;
+    """
+
+    minWins = request.args.get("minWins","")
+    sStart = request.args.get("sStart","")
+    sEnd   = request.args.get("sEnd","")
+    limit  = request.args.get("limit","")
+    # set defaults
+    if minWins == '':
+        minWins = 50
+    if sStart == '':
+        sStart = '2000'
+    if sEnd == '':
+        sEnd = '2018'
+    if limit == '':
+        limit = 10
+    con = psycopg2.connect("host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
+    cur = con.cursor()
+    cur.execute(sql, (minWins,sStart,sEnd,limit))
+    dat = cur.fetchall()
+    return render_template("three_ptm_wins.html",dat = dat)
