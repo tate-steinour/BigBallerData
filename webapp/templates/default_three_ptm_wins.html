@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3ptm_win</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+
+<h3>Query</h3>
+
+<pre>
+SELECT t_name, ts_season, ts_3ptm, ts_wins
+FROM team_stats
+  JOIN team on t_id=ts_id
+WHERE ts_wins >= 50
+ORDER BY ts_3ptm DESC
+LIMIT 10;
+</pre>
+
+<h3>Table</h3>
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+    <tr>
+    <th class="tg-0pky">t_name</th>
+    <th class="tg-0pky">ts_season</th>
+    <th class="tg-0pky">ts_3ptm</th>
+    <th class="tg-0pky">ts_wins</th>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Huston Rockets<br></td>
+    <td class="tg-0pky">2018-19<br></td>
+    <td class="tg-0pky">16.1<br></td>
+    <td class="tg-0pky">53<br></td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Huston Rockets</td>
+    <td class="tg-0pky">2017-18</td>
+    <td class="tg-0pky">15.3<br></td>
+    <td class="tg-0pky"><br>65</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Huston Rockets</td>
+    <td class="tg-0pky">2016-17</td>
+    <td class="tg-0pky">14.4<br></td>
+    <td class="tg-0pky"><br>55</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Milwaukee Bucks</td>
+    <td class="tg-0pky">2018-19<br></td>
+    <td class="tg-0pky">13.5<br></td>
+    <td class="tg-0pky"><br>60</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Golden State Warriors</td>
+    <td class="tg-0pky">2018-19</td>
+    <td class="tg-0pky">13.3<br></td>
+    <td class="tg-0pky"><br>57</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Golden State Warriors</td>
+    <td class="tg-0pky">2015-16</td>
+    <td class="tg-0pky">13.1<br></td>
+    <td class="tg-0pky"><br>73</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Cleveland Cavaliers</td>
+    <td class="tg-0pky">2016-17</td>
+    <td class="tg-0pky">13<br></td>
+    <td class="tg-0pky"><br>51</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Toronto Raptors<br></td>
+    <td class="tg-0pky">2018-19</td>
+    <td class="tg-0pky">12.4<br></td>
+    <td class="tg-0pky"><br>58</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Utah Jazz</td>
+    <td class="tg-0pky">2018-19</td>
+    <td class="tg-0pky">12.1<br></td>
+    <td class="tg-0pky"><br>50</td>
+    </tr>
+    <tr>
+    <td class="tg-0pky">Cleveland Cavaliers</td>
+    <td class="tg-0pky">2017-18</td>
+    <td class="tg-0pky">12<br></td>
+    <td class="tg-0pky"><br>50</td>
+    </tr>
+</table>
+
+<h3>Chart</h3>
+
+<div id="chart_div" style="width: 900px; height: 500px;"></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['3 Pointers', 'Wins'],
+          [ 16.1,      53],
+          [ 15.3,      65],
+          [ 14.4,     55],
+          [ 13.5,      60],
+          [ 13.3,      57],
+          [ 13.1,    73],
+          [ 13,    51],
+          [ 12.4,    58],
+          [ 12.1,    50],
+          [ 12,    50]
+        ]);
+
+        var options = {
+          title: 'Avg. 3 Pointers vs. Total Wins',
+          hAxis: {title: '3 Pointers', minValue: 10, maxValue: 18},
+          vAxis: {title: 'Wins', minValue: 45, maxValue: 75},
+          legend: 'none'
+        };
+
+        var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+      }
+    </script>
+
+</body>
+</html>
