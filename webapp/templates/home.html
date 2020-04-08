@@ -15,6 +15,14 @@
             <p><input type="submit"></p>
         </form>
 
+        <h3>Blocks by height</h3>
+        <form action = "/Blocks_by_height">
+            <p>Minimum height: <input name="minHeight" value=""> </p>
+            <p>Maximum height: <input name="maxHeight" value=""> </p>
+            <p>Limit result: <input name="limit" value="10"> </p>
+            <p><input type="submit"></p>
+        </form>
+
         <h3>Max Individual 3 pointers made</h3>
         <form action = "/max_individual_3ptm">
             <p>Team Name: <input name="teamName" value=""> </p>
@@ -40,6 +48,28 @@
             <p>Season: <input name="season" value=""> </p>
             <p><input type="submit"></p>
         </form>
+
+
+    </body>
+
+            <h3>Number of wins over the seasons</h3>
+            <form action = "/team_wins_over_seasons">
+                <p>Team Name: <input name="teamName" value=""> </p>
+                <p><input type="submit"></p>
+            </form>    
+            
+            <h3>Players by college</h3>
+            <form action = "/players_by_college">
+                <p>College: <input name="college" value=""> </p>
+                <p><input type="submit"></p>
+            </form>
+            
+            <h3>Max Team 3 pointers made by top teams</h3>
+            <form action = "/three_ptm_wins">
+                <p>Minimum wins: <input name="minWins" value=""> </p>
+                <p>Season: <input name="season" value=""> </p>
+                <p><input type="submit"></p>
+            </form>
     </div>
   </body>
 </html>
