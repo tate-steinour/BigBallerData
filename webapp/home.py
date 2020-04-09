@@ -36,7 +36,7 @@ def get_blocks():
         """
         cursor.execute(sql, (season, limit))
         queryData = cursor.fetchall()
-        return render_template('blocks_by_height.html', queryData=queryData)
+        return render_template('blocks_by_height.html', queryData=queryData, season = season, limit = limit)
 
 
 @app.route('/three_ptm_wins')
@@ -71,7 +71,8 @@ def populate():
     cur = con.cursor()
     cur.execute(sql, (minWins, sStart, sEnd, limit))
     dat = cur.fetchall()
-    return render_template("three_ptm_wins.html", dat=dat)
+    return render_template("three_ptm_wins.html", dat=dat, minWins = minWins, sStart = sStart,
+                                                sEnd = sEnd, limit = limit)
 
 
 @app.route('/team_wins_over_seasons')
@@ -107,7 +108,7 @@ def wins_over_season():
         #newR.append(temp[1])
         newR.append(row[2])
         newdat.append(newR)
-    return render_template('team_wins_by_season.html', dat=newdat)
+    return render_template('team_wins_by_season.html', dat=newdat, teamName=teamName, limit=limit)
 
 
 @app.route('/max_individual_3ptm')
@@ -132,4 +133,4 @@ def get_indiv_3ptm():
         """
         cursor.execute(sql, (teamName, season, limit))
         queryData = cursor.fetchall()
-        return render_template('max_individual_3ptm.html', queryData = queryData)
+        return render_template('max_individual_3ptm.html', queryData = queryData, teamName=teamName, season=season, limit=limit)
