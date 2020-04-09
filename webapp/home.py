@@ -11,12 +11,16 @@ def home():
     #cursor = con.cursor()
     return render_template('home.html')
 
+def valid_year(year_str):
+    y = int(year_str)
+    return (y < 2018) and (y > 1999)
+
 
 @app.route('/Blocks_by_height')
 def get_blocks():
     season = request.args.get("season", "")
     limit = request.args.get("limit", "")
-    if (not season) or (int(season) < 2000) or (int(season) > 2017):
+    if (not season) or (not valid_year(season)):
         # default when no user input. (what GP3 showed)
         flash('Please enter a valid season')
         return redirect('/')
@@ -67,6 +71,11 @@ def populate():
         sEnd = '2018'
     if limit == '':
         limit = 10
+
+    if (not valid_year(sStart)) or (not valid_year(sEnd)) or (int(minWins) < 0):
+        flash("Please enter valid input")
+        return redirect('/')
+    
     con = psycopg2.connect(
         "host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
     cur = con.cursor()
