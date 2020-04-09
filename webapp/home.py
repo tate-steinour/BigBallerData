@@ -133,3 +133,30 @@ def get_indiv_3ptm():
         cursor.execute(sql, (teamName, season, limit))
         queryData = cursor.fetchall()
         return render_template('max_individual_3ptm.html', queryData = queryData)
+
+@app.route('/players_by_college')
+def players_by_college():
+
+    sql = """
+    SELECT DISTINCT p_name, ps_games, ps_season, t_name
+    FROM player
+        JOIN player_stats ON p_name=ps_name
+        JOIN team_stats ON ps_teamid=ts_id
+        JOIN team ON ts_id=t_id
+    WHERE p_college= %s
+    ORDER BY ps_season DESC
+    LIMIT %s;
+    """
+
+    college = request.args.get("college", "")
+    limit = request.args.get("limit", "")
+    # set defaults
+    if college == '':
+        college = 'Virginia Commonwealth University'
+    if limit == '':
+        limit = 10
+    con = psycopg2.connect("host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
+    cur = con.cursor()
+    cur.execute(sql, (college, limit))
+    dat = cur.fetchall()
+    return render_template("players_by_college.html", dat=dat, college = college, limit = limit)
