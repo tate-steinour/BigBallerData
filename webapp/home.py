@@ -23,7 +23,7 @@ def get_blocks():
 
     if not limit.isdigit() or int(limit) < 1:
         limit = 10
-    if(not season.isdigit() or not limit.isdigit()):
+    if(not season.isdigit()):
         flash('Please enter valid numerical inputs')
         return redirect('/')
     if(not valid_year(season)):
