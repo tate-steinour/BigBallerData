@@ -2,72 +2,81 @@
 <html>
 <head>
     <title>3ptm_win</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
 
-<h3>Query</h3>
+<h3 id="title">3ptm Wins</h3>
 
-<pre>
-SELECT t_name, ts_season, ts_3ptm, ts_wins
-FROM team_stats
-  JOIN team on t_id=ts_id
-WHERE ts_wins >= 50
-ORDER BY ts_3ptm DESC
-LIMIT 10;
-</pre>
 
-<h3>Table</h3>
-
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-</style>
-<table class="tg">
-    <tr>
-    <th class="tg-0pky">t_name</th>
-    <th class="tg-0pky">ts_season</th>
-    <th class="tg-0pky">ts_3ptm</th>
-    <th class="tg-0pky">ts_wins</th>
+<div id="container">
+    <form action = "/three_ptm_wins">
+        <p>Minimum wins: <input name="minWins" value=""> </p>
+        <p>Season:</p>
+        <p>Start Year: <input name="sStart" value=""></p>
+        <p>End Year: <input name = "sEnd" value=""></p>
+        <p>Limit result: <input name="limit" value=""> </p>
+        <p><input type="submit"></p>
+    </form>
+    <form action = "/">
+        <p><input type ="submit" value="Back"></p>
+    </form>
+    <h3>Table</h3>
+    <table>
+        <tr>
+        <th class="tg-0pky">t_name</th>
+        <th class="tg-0pky">ts_season</th>
+        <th class="tg-0pky">ts_3ptm</th>
+        <th class="tg-0pky">ts_wins</th>
+        </tr>
+        {% if dat %}
+        {% for row in dat %}
+        <tr>
+        <td class="tg-0pky">{{row[0]}}</td>
+        <td class="tg-0pky">{{row[1]}}</td>
+        <td class="tg-0pky">{{row[2]}}</td>
+        <td class="tg-0pky">{{row[3]}}</td>
     </tr>
-    {% if dat %}
-    {% for row in dat %}
-    <tr>
-      <td class="tg-0pky">{{row[0]}}</td>
-      <td class="tg-0pky">{{row[1]}}</td>
-      <td class="tg-0pky">{{row[2]}}</td>
-      <td class="tg-0pky">{{row[3]}}</td>
-  </tr>
-    {% endfor %}
-    {% endif %}
-</table>
+        {% endfor %}
+        {% endif %}
+    </table>
 
-<h3>Chart</h3>
+    <h3>Chart</h3>
 
-<div id="chart_div" style="width: 900px; height: 500px;"></div>
 
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable({{dat}});
+    <div id="chart_div"></div>
 
-        var options = {
-          title: 'Avg. 3 Pointers vs. Total Wins',
-          hAxis: {title: '3 Pointers', minValue: 10, maxValue: 18},
-          vAxis: {title: 'Wins', minValue: 45, maxValue: 75},
-          legend: 'none'
-        };
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
 
-        var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+            ['3 Pointers', 'Wins'],
+            {% for row in dat %}
+            [ {{row[2]}},  {{row[3]}}],
+            {% endfor %}
+            ]);
 
-        chart.draw(data, options);
-      }
-    </script>
+            var options = {
+                title: 'Avg. 3 Pointers vs. Total Wins',
+                width: '800',
+                height: '600',
+                hAxis: {title: '3 Pointers', minValue: 10, maxValue: 18},
+                vAxis: {title: 'Wins', minValue: 45, maxValue: 75},
+                legend: 'none',
+                'colors': ['#6a2c70']
+            };
+
+            var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+
+            chart.draw(data, options);
+        }
+        </script>
+</div>
 
 </body>
 </html>
