@@ -20,6 +20,10 @@ def valid_year(year_str):
 def get_blocks():
     season = request.args.get("season", "")
     limit = request.args.get("limit", "")
+    
+    if limit == "" or int(limit) < 1:
+        limit = 10
+
     if (not season) or (not valid_year(season)):
         # default when no user input. (what GP3 showed)
         flash('Please enter a valid season')
@@ -69,7 +73,7 @@ def populate():
         sStart = '2000'
     if sEnd == '':
         sEnd = '2018'
-    if limit == '':
+    if limit == '' or int(limit) < 1:
         limit = 10
 
     if (not valid_year(sStart)) or (not valid_year(sEnd)) or (int(minWins) < 0):
@@ -102,7 +106,7 @@ def wins_over_season():
     # set defaulls
     if teamName == '':
         teamName = 'Philadelphia 76ers'
-    if limit == '':
+    if limit == '' or int(limit) < 1:
         limit = 10
     con = psycopg2.connect("host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
     cur = con.cursor()
@@ -126,6 +130,10 @@ def get_indiv_3ptm():
     teamName = request.args.get("teamName","")
     season = request.args.get("season","")
     limit = request.args.get("limit", "")
+
+    if limit == "" or int(limit) < 1:
+        limit = 10
+
     if not teamName or not season:
         return render_template('default_max_individual_3ptm.html') #default when no user input. (what GP3 showed)
     else:
@@ -143,7 +151,7 @@ def get_indiv_3ptm():
         """
         cursor.execute(sql, (teamName, season, limit))
         queryData = cursor.fetchall()
-        return render_template('max_individual_3ptm.html', queryData = queryData, teamName=teamName, season=season, limit=limit)
+        return render_template('max_individual_3ptm.html', queryData = queryData)
 
 @app.route('/players_by_college')
 def players_by_college():
@@ -164,7 +172,7 @@ def players_by_college():
     # set defaults
     if college == '':
         college = 'Virginia Commonwealth University'
-    if limit == '':
+    if limit == '' or int(limit) < 1:
         limit = 10
     con = psycopg2.connect("host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
     cur = con.cursor()
