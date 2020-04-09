@@ -143,7 +143,7 @@ def get_indiv_3ptm():
         """
         cursor.execute(sql, (teamName, season, limit))
         queryData = cursor.fetchall()
-        return render_template('max_individual_3ptm.html', queryData = queryData)
+        return render_template('max_individual_3ptm.html', queryData = queryData, teamName=teamName, season=season, limit=limit)
 
 @app.route('/players_by_college')
 def players_by_college():
