@@ -7,14 +7,35 @@ app.secret_key = 'jatt'
 
 @app.route('/')
 def home():
-    #con = psycopg2.connect("host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
-    #cursor = con.cursor()
     return render_template('home.html')
 
 def valid_year(year_str):
     y = int(year_str)
     return (y < 2018) and (y > 1999)
 
+def getCursor():
+    con = psycopg2.connect("host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
+    return con.cursor()
+
+def getTeams():
+    list = []
+    cursor = getCursor()
+    sql = "SELECT t_name FROM team"
+    cursor.execute(sql, ())
+    queryData = cursor.fetchall()
+    for row in queryData:
+        list.append(row[0])
+    return list
+
+def getColleges():
+    list = []
+    cursor = getCursor()
+    sql = "SELECT p_college FROM player"
+    cursor.execute(sql, ())
+    queryData = cursor.fetchall()
+    for row in queryData:
+        list.append(row[0])
+    return list
 
 @app.route('/Blocks_by_height')
 def get_blocks():
@@ -30,9 +51,7 @@ def get_blocks():
         flash('Please enter a valid season, between 2000 and 2017 inclusive')
         return redirect('/')
 
-    con = psycopg2.connect(
-        "host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
-    cursor = con.cursor()
+    cursor = getCursor()
     sql = """
     SELECT DISTINCT t_name, ps_season, ps_name, ps_blck, p_height
     FROM player_stats
@@ -81,9 +100,7 @@ def populate():
         flash('Please enter positive number for minWins')
         return redirect('/')
 
-    con = psycopg2.connect(
-        "host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
-    cur = con.cursor()
+    cur = getCursor()
     cur.execute(sql, (minWins, sStart, sEnd, limit))
     dat = cur.fetchall()
     return render_template("three_ptm_wins.html", dat=dat, minWins = minWins, sStart = sStart,
@@ -104,13 +121,16 @@ def wins_over_season():
 
     teamName = request.args.get("teamName", "")
     limit = request.args.get("limit", "")
-    # set defaulls
-    if teamName == '':
-        teamName = 'Philadelphia 76ers'
+    # set defaults
     if not limit.isdigit() or int(limit) < 1:
         limit = 10
-    con = psycopg2.connect("host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
-    cur = con.cursor()
+
+    teamNameList = getTeams()
+    if(not teamName in teamNameList):
+        flash('Please enter a valid team name from the list')
+        return redirect('/')
+
+    cur = getCursor()
     cur.execute(sql, (teamName, limit))
     dat = cur.fetchall()
     newdat = []
@@ -133,9 +153,6 @@ def get_indiv_3ptm():
     limit = request.args.get("limit", "")
     
     #set defaults
-    if teamName == '':
-        teamName == 'Golden State Warriors'
-
     if not limit.isdigit() or int(limit) < 1:
         limit = 10
 
@@ -143,8 +160,12 @@ def get_indiv_3ptm():
         flash('Please enter a valid season, between 2000 and 2017 inclusive')
         return redirect('/')
 
-    con = psycopg2.connect("host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
-    cursor = con.cursor()
+    teamNameList = getTeams()
+    if(not teamName in teamNameList):
+        flash('Please enter a valid team name from the list')
+        return redirect('/')
+
+    cursor = getCursor()
     sql = """
     SELECT DISTINCT t_name, ps_season, ps_name, ps_3ptm
     FROM player_stats
@@ -176,13 +197,15 @@ def players_by_college():
     college = request.args.get("college", "")
     limit = request.args.get("limit", "")
     # set defaults
-    if college == '':
-        college = 'Virginia Commonwealth University'
     if not limit.isdigit() or int(limit) < 1:
         limit = 10
 
-    con = psycopg2.connect("host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
-    cur = con.cursor()
+    collegeNameList = getColleges()
+    if(not college in collegeNameList):
+        flash('Please enter a valid college name from the list')
+        return redirect('/')
+
+    cur = getCursor()
     cur.execute(sql, (college, limit))
     dat = cur.fetchall()
     return render_template("players_by_college.html", dat=dat, college = college, limit = limit)
