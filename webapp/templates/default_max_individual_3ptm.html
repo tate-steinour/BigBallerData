@@ -2,120 +2,113 @@
 <html>
 <head>
     <title>MaxInDiv3ptm_Season</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
 
-<h3>Query</h3>
-
-<pre>
-SELECT * FROM max_individual_3ptm;
-</pre>
+<h3 id="title">Max Individual 3ptms</h3>
 
 <h3>Table</h3>
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-</style>
-<table class="tg">
-    <tr>
-    <th>Team Name</th>
-    <th>Season</th>
-    <th>Player Name</th>
-    <th>3 Pointers Scored</th>
-    </tr>
-    <tr>
-    <td class="tg-0pky">Golden State Warriors</td>
-    <td class="tg-0pky">2016</td>
-    <td class="tg-0pky">Stephen Curry</td>
-    <td class="tg-0pky">402</td>
-    </tr>
-    <tr>
-    <td class="tg-0pky">Golden State Warriors</td>
-    <td class="tg-0pky">2017</td>
-    <td class="tg-0pky">Stephen Curry</td>
-    <td class="tg-0pky">324</td>
-    </tr>
-    <tr>
-    <td class="tg-0pky">Golden State Warriors</td>
-    <td class="tg-0pky">2015</td>
-    <td class="tg-0pky">Stephen Curry</td>
-    <td class="tg-0pky">286</td>
-    </tr>
-    <tr>
-    <td class="tg-0pky">Golden State Warriors</td>
-    <td class="tg-0pky">2016</td>
-    <td class="tg-0pky">Klay Thompson</td>
-    <td class="tg-0pky">276</td>
-    </tr>
-    <tr>
-    <td class="tg-0pky">Golden State Warriors</td>
-    <td class="tg-0pky">2013</td>
-    <td class="tg-0pky">Stephen Curry</td>
-    <td class="tg-0pky">272</td>
-    </tr>
-    <tr>
-    <td class="tg-0pky">Oklahoma City Thunder</td>
-    <td class="tg-0pky">2006</td>
-    <td class="tg-0pky">Ray Allen</td>
-    <td class="tg-0pky">269</td>
-    </tr>
-    <tr>
-    <td class="tg-0pky">Golden State Warriors</td>
-    <td class="tg-0pky">2017</td>
-    <td class="tg-0pky">Klay Thompson</td>
-    <td class="tg-0pky">268</td>
-    </tr>
-    <tr>
-    <td class="tg-0pky">Houston Rockets</td>
-    <td class="tg-0pky">2017</td>
-    <td class="tg-0pky">James Harden</td>
-    <td class="tg-0pky">262</td>
-    </tr>
-    <tr>
-    <td class="tg-0pky">Golden State Warriors</td>
-    <td class="tg-0pky">2014</td>
-    <td class="tg-0pky">Stephen Curry</td>
-    <td class="tg-0pky">261</td>
-    </tr>
-    <tr>
-    <td class="tg-0pky">Houston Rockets</td>
-    <td class="tg-0pky">2017</td>
-    <td class="tg-0pky">Eric Gordon</td>
-    <td class="tg-0pky">246</td>
-    </tr>
-</table>
+<div id="container">
+    <table>
+        <tr>
+        <th>Team Name</th>
+        <th>Season</th>
+        <th>Player Name</th>
+        <th>3 Pointers Scored</th>
+        </tr>
+        <tr>
+        <td class="tg-0pky">Golden State Warriors</td>
+        <td class="tg-0pky">2016</td>
+        <td class="tg-0pky">Stephen Curry</td>
+        <td class="tg-0pky">402</td>
+        </tr>
+        <tr>
+        <td class="tg-0pky">Golden State Warriors</td>
+        <td class="tg-0pky">2017</td>
+        <td class="tg-0pky">Stephen Curry</td>
+        <td class="tg-0pky">324</td>
+        </tr>
+        <tr>
+        <td class="tg-0pky">Golden State Warriors</td>
+        <td class="tg-0pky">2015</td>
+        <td class="tg-0pky">Stephen Curry</td>
+        <td class="tg-0pky">286</td>
+        </tr>
+        <tr>
+        <td class="tg-0pky">Golden State Warriors</td>
+        <td class="tg-0pky">2016</td>
+        <td class="tg-0pky">Klay Thompson</td>
+        <td class="tg-0pky">276</td>
+        </tr>
+        <tr>
+        <td class="tg-0pky">Golden State Warriors</td>
+        <td class="tg-0pky">2013</td>
+        <td class="tg-0pky">Stephen Curry</td>
+        <td class="tg-0pky">272</td>
+        </tr>
+        <tr>
+        <td class="tg-0pky">Oklahoma City Thunder</td>
+        <td class="tg-0pky">2006</td>
+        <td class="tg-0pky">Ray Allen</td>
+        <td class="tg-0pky">269</td>
+        </tr>
+        <tr>
+        <td class="tg-0pky">Golden State Warriors</td>
+        <td class="tg-0pky">2017</td>
+        <td class="tg-0pky">Klay Thompson</td>
+        <td class="tg-0pky">268</td>
+        </tr>
+        <tr>
+        <td class="tg-0pky">Houston Rockets</td>
+        <td class="tg-0pky">2017</td>
+        <td class="tg-0pky">James Harden</td>
+        <td class="tg-0pky">262</td>
+        </tr>
+        <tr>
+        <td class="tg-0pky">Golden State Warriors</td>
+        <td class="tg-0pky">2014</td>
+        <td class="tg-0pky">Stephen Curry</td>
+        <td class="tg-0pky">261</td>
+        </tr>
+        <tr>
+        <td class="tg-0pky">Houston Rockets</td>
+        <td class="tg-0pky">2017</td>
+        <td class="tg-0pky">Eric Gordon</td>
+        <td class="tg-0pky">246</td>
+        </tr>
+    </table>
 
-<h3>Chart</h3>
+    <h3>Chart</h3>
 
-<div id="piechart" style="width: 500px; height: 300px;"></div>
+    <div id="piechart" style="width: 500px; height: 300px;"></div>
 
-<script type="text/javascript">
-  google.charts.load('current', {'packages':['corechart']});
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
+    <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
 
-    var data = google.visualization.arrayToDataTable([
-      ["Name", "Count"],
-      ["Stephen Curry (GSW)", 5],
-      ["Klay Thompson (GSW)", 2],
-      ["Ray Allen (OKC)", 1],
-      ["James Harden (HOU)", 1],
-      ["Eric Gordon (HOU)", 1]
-    ]);
+        var data = google.visualization.arrayToDataTable([
+        ["Name", "Count"],
+        ["Stephen Curry (GSW)", 5],
+        ["Klay Thompson (GSW)", 2],
+        ["Ray Allen (OKC)", 1],
+        ["James Harden (HOU)", 1],
+        ["Eric Gordon (HOU)", 1]
+        ]);
 
-    var options = {
-      chartArea: {width:'90%', height:'90%'},
-    };
+        var options = {
+        chartArea: {width:'90%', height:'90%'},
+        };
 
-    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-    chart.draw(data, options);
-  }
-</script>
+        chart.draw(data, options);
+    }
+    </script>
+</div>  
 
 </body>
 </html>
