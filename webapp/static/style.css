@@ -47,3 +47,11 @@ input[type=submit]:hover {
 #chart_div {
     margin-left: -10em;
 }
+
+#flash-message {
+    text-align: center;
+    background-color: #ffb0ab;
+    color: rgb(119, 5, 5);
+    padding: 1em;
+    border: 1px rgb(119, 5, 5) solid;
+}

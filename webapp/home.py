@@ -3,7 +3,7 @@ import psycopg2
 
 app = Flask(__name__)
 
-
+app.secret_key = 'jatt'
 
 @app.route('/')
 def home():
@@ -16,9 +16,10 @@ def home():
 def get_blocks():
     season = request.args.get("season", "")
     limit = request.args.get("limit", "")
-    if not season:
+    if (not season) or (int(season) < 2000) or (int(season) > 2017):
         # default when no user input. (what GP3 showed)
-        return render_template('default_blocks_by_height.html')
+        flash('Please enter a valid season')
+        return redirect('/')
     else:
         con = psycopg2.connect(
             "host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")

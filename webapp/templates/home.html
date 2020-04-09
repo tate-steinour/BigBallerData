@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
 </head>
   <body>
+      <!-- flash messages -->
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          {% for message in messages %}
+          <div id="flash-message">{{ message }}</div>
+          {% endfor %}
+      {% endif %}
+      {% endwith %}
       <h2 id="title">Big Baller Data</h2>
       <div id="container">
         <h3>Blocks by height</h3>
