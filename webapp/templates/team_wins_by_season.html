@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>philly_team_pts</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+
+<h3>Query</h3>
+
+<pre>
+SELECT * FROM philly_team_pts
+</pre>
+
+<h3>Table</h3>
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+    <tr>
+    <th class="tg-0pky">ts_season</th>
+    <th class="tg-0pky">ts_wins</th>
+    </tr>
+    {% for row in dat%}
+    <tr>
+    <td class="tg-0pky">{{row[1]}}<br></td>
+    <td class="tg-0pky">{{row[2]}}<br></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3>Chart</h3>
+
+<div id="linechart" sytle="width: 100%;"></div>
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+        ['Season', 'Wins'],
+        {% for row in dat%}
+        [{{row[1]}}, {{row[2]}}],
+        {% endfor %}
+    ]);
+
+    var options = {
+        title: '{{dat[0][0]}} Wins From 2000-01 to 2018-19',
+        curveType: 'function',
+        hAxis: { format: ' '},
+        legend: { position: 'bottom' },
+        
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('linechart'));
+
+    chart.draw(data, options);
+    }
+</script>
+
+</body>
+</html>
