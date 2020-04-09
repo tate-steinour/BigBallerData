@@ -11,6 +11,10 @@ def home():
     #cursor = con.cursor()
     return render_template('home.html')
 
+def valid_year(year_str):
+    y = int(year_str)
+    return (y < 2018) and (y > 1999)
+
 
 @app.route('/Blocks_by_height')
 def get_blocks():
@@ -19,7 +23,7 @@ def get_blocks():
     if(not season.isdigit() or not limit.isdigit()):
         flash('Please enter valid numerical inputs')
         return redirect('/')
-    if (not season) or (int(season) < 2000) or (int(season) > 2017):
+    if (not season) or (not valid_year(season)):
         flash('Please enter a valid season, between 2000 and 2017 inclusive')
         return redirect('/')
     else:
@@ -75,6 +79,10 @@ def populate():
         flash('Please enter valid numerical inputs')
         return redirect('/')
 
+    if (not valid_year(sStart)) or (not valid_year(sEnd)) or (int(minWins) < 0):
+        flash("Please enter valid input")
+        return redirect('/')
+    
     con = psycopg2.connect(
         "host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
     cur = con.cursor()
