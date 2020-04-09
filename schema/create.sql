@@ -38,7 +38,7 @@ CREATE TABLE player (
   p_yearStart integer,
   p_yearEnd integer,
   p_position text,
-  p_height text,
+  p_height real,
   p_weight integer,
   p_birthdate text,
   p_college text
