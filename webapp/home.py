@@ -21,33 +21,32 @@ def get_blocks():
     season = request.args.get("season", "")
     limit = request.args.get("limit", "")
 
-    if limit == '' or int(limit) < 1:
+    if not limit.isdigit() or int(limit) < 1:
         limit = 10
-    
     if(not season.isdigit() or not limit.isdigit()):
         flash('Please enter valid numerical inputs')
         return redirect('/')
-    if (not season) or (not valid_year(season)):
+    if(not valid_year(season)):
         flash('Please enter a valid season, between 2000 and 2017 inclusive')
         return redirect('/')
-    else:
-        con = psycopg2.connect(
-            "host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
-        cursor = con.cursor()
-        sql = """
-        SELECT DISTINCT t_name, ps_season, ps_name, ps_blck, p_height
-        FROM player_stats
-            JOIN team_stats ON ps_teamid=ts_id
-            JOIN team ON t_id=ts_id
-            JOIN player ON ps_name=p_name
-        WHERE ps_blck >= 1
-            AND ps_season = %s
-        ORDER BY ps_blck DESC
-        LIMIT %s;
-        """
-        cursor.execute(sql, (season, limit))
-        queryData = cursor.fetchall()
-        return render_template('blocks_by_height.html', queryData=queryData, season = season, limit = limit)
+
+    con = psycopg2.connect(
+        "host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
+    cursor = con.cursor()
+    sql = """
+    SELECT DISTINCT t_name, ps_season, ps_name, ps_blck, p_height
+    FROM player_stats
+        JOIN team_stats ON ps_teamid=ts_id
+        JOIN team ON t_id=ts_id
+        JOIN player ON ps_name=p_name
+    WHERE ps_blck >= 1
+    AND ps_season = %s
+    ORDER BY ps_blck DESC
+    LIMIT %s;
+    """
+    cursor.execute(sql, (season, limit))
+    queryData = cursor.fetchall()
+    return render_template('blocks_by_height.html', queryData=queryData, season = season, limit = limit)
 
 
 @app.route('/three_ptm_wins')
@@ -68,25 +67,20 @@ def populate():
     sStart = request.args.get("sStart", "")
     sEnd = request.args.get("sEnd", "")
     limit = request.args.get("limit", "")
-    # set defaults
-    if minWins == '':
-        minWins = 50
-    if sStart == '':
-        sStart = '2000'
-    if sEnd == '':
-        sEnd = '2018'
-    if limit == '' or int(limit) < 1:
+    
+    if not limit.isdigit() or int(limit) < 1:
         limit = 10
-
     if(not minWins.isdigit() or not sStart.isdigit() 
-        or not sEnd.isdigit() or not limit.isdigit()):
+        or not sEnd.isdigit()):
         flash('Please enter valid numerical inputs')
         return redirect('/')
-
-    if (not valid_year(sStart)) or (not valid_year(sEnd)) or (int(minWins) < 0):
-        flash("Please enter valid input")
+    if (not valid_year(sStart)) or (not valid_year(sEnd)):
+        flash('Please enter valid seasons, between 2000 and 2017 inclusive')
         return redirect('/')
-    
+    if(int(minWins) < 0):
+        flash('Please enter positive number for minWins')
+        return redirect('/')
+
     con = psycopg2.connect(
         "host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
     cur = con.cursor()
@@ -113,7 +107,7 @@ def wins_over_season():
     # set defaulls
     if teamName == '':
         teamName = 'Philadelphia 76ers'
-    if limit == '' or int(limit) < 1:
+    if not limit.isdigit() or int(limit) < 1:
         limit = 10
     con = psycopg2.connect("host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
     cur = con.cursor()
@@ -141,16 +135,11 @@ def get_indiv_3ptm():
     #set defaults
     if teamName == '':
         teamName == 'Golden State Warriors'
-    if season == '':
-        season = 2017
-    if limit == '' or int(limit) < 1:
+
+    if not limit.isdigit() or int(limit) < 1:
         limit = 10
 
-    if(not season.isdigit() or not limit.isdigit()):
-        flash('Please enter valid numerical inputs')
-        return redirect('/')
-
-    if (not season) or (int(season) < 2000) or (int(season) > 2017):
+    if (not season.isdigit() or not valid_year(season)):
         flash('Please enter a valid season, between 2000 and 2017 inclusive')
         return redirect('/')
 
@@ -189,11 +178,8 @@ def players_by_college():
     # set defaults
     if college == '':
         college = 'Virginia Commonwealth University'
-    if limit == '' or int(limit) < 1:
+    if not limit.isdigit() or int(limit) < 1:
         limit = 10
-    if(not limit.isdigit()):
-        flash('Please enter valid numerical limit')
-        return redirect('/')
 
     con = psycopg2.connect("host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
     cur = con.cursor()
