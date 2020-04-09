@@ -14,8 +14,7 @@ def home():
 
 @app.route('/Blocks_by_height')
 def get_blocks():
-    minHeight = request.args.get("minHeight", "")
-    maxHeight = request.args.get("maxHeight", "")
+    season = request.args.get("season", "")
     limit = request.args.get("limit", "")
     if not minHeight and not maxHeight:
         # default when no user input. (what GP3 showed)
@@ -36,7 +35,7 @@ def get_blocks():
         ORDER BY ps_blck DESC
         LIMIT %s;
         """
-        cursor.execute(sql, (minHeight, maxHeight, limit))
+        cursor.execute(sql, (season, limit))
         queuryData = cursor.fetchall()
         return render_template('blocks_by_height.html', queuryData=queuryData)
 
