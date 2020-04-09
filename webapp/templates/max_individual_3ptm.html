@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>MaxInDiv3ptm_Season</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+
+<body>
+
+  <form action="/max_individual_3ptm">
+    <p>Team Name: <input name="teamName" value=""> </p>
+    <p>Season: <input name="season" value=""> </p>
+    <p>Limit result: <input name="limit" value="10"> </p>
+    <p><input type="submit"></p>
+  </form>
+  <form action="/">
+    <p><input type="submit" value="Back"></p>
+  </form>
+
+  <h3>Table</h3>
+
+  <style type="text/css">
+    .tg {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    .tg td {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      padding: 10px 5px;
+      border-style: solid;
+      border-width: 1px;
+      overflow: hidden;
+      word-break: normal;
+      border-color: black;
+    }
+
+    .tg th {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: normal;
+      padding: 10px 5px;
+      border-style: solid;
+      border-width: 1px;
+      overflow: hidden;
+      word-break: normal;
+      border-color: black;
+    }
+
+    .tg .tg-0pky {
+      border-color: inherit;
+      text-align: left;
+      vertical-align: top
+    }
+  </style>
+  <table class="tg">
+    <tr>
+      <th>Team Name</th>
+      <th>Season</th>
+      <th>Player Name</th>
+      <th>3 Pointers Scored</th>
+    </tr>
+    {% for row in queryData %}
+    <tr>
+      <td>{{ row[0] }}</td>
+      <td>{{ row[1] }}</td>
+      <td>{{ row[2] }}</td>
+      <td>{{ row[3] }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h3>Chart</h3>
+
+  <div id="piechart" style="width: 500px; height: 300px;"></div>
+
+  <script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+      var data = google.visualization.arrayToDataTable([
+        ["Name", "Count"],
+        {% for row in queryData %}
+          ["{{ row[2] }}", {{ row[3] }}],
+        {% endfor %}
+      ]);
+
+      var options = {
+        chartArea: { width: '90%', height: '90%' },
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+      chart.draw(data, options);
+    }
+  </script>
+
+</body>
+
+</html>

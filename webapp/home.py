@@ -16,7 +16,7 @@ def home():
 def get_blocks():
     season = request.args.get("season", "")
     limit = request.args.get("limit", "")
-    if not minHeight and not maxHeight:
+    if not season:
         # default when no user input. (what GP3 showed)
         return render_template('default_blocks_by_height.html')
     else:
@@ -30,14 +30,13 @@ def get_blocks():
             JOIN team ON t_id=ts_id
             JOIN player ON ps_name=p_name
         WHERE ps_blck >= 1
-            AND p_height >= %s
-            AND p_height <= %s
+            AND ps_season = %s
         ORDER BY ps_blck DESC
         LIMIT %s;
         """
         cursor.execute(sql, (season, limit))
-        queuryData = cursor.fetchall()
-        return render_template('blocks_by_height.html', queuryData=queuryData)
+        queryData = cursor.fetchall()
+        return render_template('blocks_by_height.html', queryData=queryData)
 
 
 @app.route('/three_ptm_wins')
@@ -109,3 +108,28 @@ def wins_over_season():
         newR.append(row[2])
         newdat.append(newR)
     return render_template('team_wins_by_season.html', dat=newdat)
+
+
+@app.route('/max_individual_3ptm')
+def get_indiv_3ptm():
+    teamName = request.args.get("teamName","")
+    season = request.args.get("season","")
+    limit = request.args.get("limit", "")
+    if not teamName or not season:
+        return render_template('default_max_individual_3ptm.html') #default when no user input. (what GP3 showed)
+    else:
+        con = psycopg2.connect("host=localhost dbname=jatt user=jatt password=3T@R@9D@xcm_5+C+")
+        cursor = con.cursor()
+        sql = """
+        SELECT DISTINCT t_name, ps_season, ps_name, ps_3ptm
+        FROM player_stats
+            JOIN team_stats ON ps_teamid=ts_id
+            JOIN team ON t_id=ts_id
+        WHERE t_name = %s
+            AND ps_season = %s
+        ORDER BY ps_3ptm DESC
+        LIMIT %s;
+        """
+        cursor.execute(sql, (teamName, season, limit))
+        queryData = cursor.fetchall()
+        return render_template('max_individual_3ptm.html', queryData = queryData)

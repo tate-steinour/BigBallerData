@@ -32,7 +32,7 @@
                     <th class="tg-0pky">Blocks</th>
                     <th class="tg-0pky">Height</th>
                 </tr>
-                {% for row in queuryData %}
+                {% for row in queryData %}
                 <tr>
                     <td>{{ row[0] }}</td>
                     <td>{{ row[1] }}</td>
@@ -62,7 +62,7 @@
                     // Create the data table.
                     var data = new google.visualization.arrayToDataTable([
                         ["Player" + " Height", "Blocks"],
-                        {% for row in queuryData %}
+                        {% for row in queryData %}
                             ["{{ row[2] }} {{ row[4] }}", {{ row[3] }}],
                         {% endfor %}
                     ]);
