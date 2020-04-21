@@ -1,0 +1,2 @@
+Please write a 1-2 line description of your project.
+See http://apps4va.cs.jmu.edu/2017/ for examples.
