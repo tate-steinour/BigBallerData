@@ -16,44 +16,81 @@
       {% endwith %}
       <h2 id="title">Big Baller Data</h2>
       <div id="container">
-        <h3>Blocks by height</h3>
-        <form action = "/Blocks_by_height">
-            <p>Season: <input name="season" value=""> </p>
-            <p>Limit result: <input name="limit" value="10"> </p>
-            <p><input type="submit"></p>
-        </form>
 
-        <h3>Max Individual 3 pointers made</h3>
-        <form action = "/max_individual_3ptm">
-            <p>Team Name: <input name="teamName" value=""> </p>
-            <p>Season: <input name="season" value=""> </p>
-            <p>Limit result: <input name="limit" value="10"> </p>
-            <p><input type="submit"></p>
-        </form>
+        <select id="query-selection" onchange="toggleVisible()">
+            <option value="blocks-by-height">Blocks By Height</option>
+            <option value="max-indiv-3ptm">Max Individual Three-Pointers Made</option>
+            <option value="num-wins">Number of Wins Over Seasons</option>
+            <option value="players-by-college">Players By College</option>
+            <option value="max-team-3ptm">Max Team Three-Pointers Made</option>
+        </select>
 
-        <h3>Number of wins over the seasons</h3>
-        <form action = "/team_wins_over_seasons">
-            <p>Team Name: <input name="teamName" value=""> </p>
-            <p>Limit result: <input name="limit" value="10"> </p>
-            <p><input type="submit"></p>
-        </form>    
+        <div id="blocks-by-height">
+          <h3>Blocks by height</h3>
+          <form action = "/Blocks_by_height">
+              <p>Season: <input name="season" value=""> </p>
+              <p>Limit result: <input name="limit" value="10"> </p>
+              <p><input type="submit"></p>
+          </form>
+        </div>
         
-        <h3>Players by college</h3>
-        <form action = "/players_by_college">
-            <p>College: <input name="college" value=""> </p>
-            <p>Limit result: <input name="limit" value="10"> </p>
-            <p><input type="submit"></p>
-        </form>
+        <div id="max-indiv-3ptm">
+          <h3>Max Individual 3 pointers made</h3>
+          <form action = "/max_individual_3ptm">
+              <p>Team Name: <input name="teamName" value=""> </p>
+              <p>Season: <input name="season" value=""> </p>
+              <p>Limit result: <input name="limit" value="10"> </p>
+              <p><input type="submit"></p>
+          </form>
+        </div>
         
-        <h3>Max Team 3 pointers made by top teams</h3>
-        <form action = "/three_ptm_wins">
-            <p>Minimum wins: <input name="minWins" value=""> </p>
-            <p>Season:</p>
-            <p>Start Year: <input name="sStart" value=""></p>
-            <p>End Year: <input name = "sEnd" value=""></p>
-            <p>Limit result: <input name="limit" value="10"> </p>
-            <p><input type="submit"></p>
-        </form>
+        <div id="num-wins">
+          <h3>Number of wins over the seasons</h3>
+          <form action = "/team_wins_over_seasons">
+              <p>Team Name: <input name="teamName" value=""> </p>
+              <p>Limit result: <input name="limit" value="10"> </p>
+              <p><input type="submit"></p>
+          </form> 
+        </div>
+        
+        <div id="players-by-college">
+          <h3>Players by college</h3>
+          <form action = "/players_by_college">
+              <p>College: <input name="college" value=""> </p>
+              <p>Limit result: <input name="limit" value="10"> </p>
+              <p><input type="submit"></p>
+          </form>
+        </div>
+        
+        <div id="max-team-3ptm">
+          <h3>Max Team 3 pointers made by top teams</h3>
+          <form action = "/three_ptm_wins">
+              <p>Minimum wins: <input name="minWins" value=""> </p>
+              <p>Season:</p>
+              <p>Start Year: <input name="sStart" value=""></p>
+              <p>End Year: <input name = "sEnd" value=""></p>
+              <p>Limit result: <input name="limit" value="10"> </p>
+              <p><input type="submit"></p>
+          </form>
+        </div>
+
+        <script>
+            function toggleVisible() {
+            var queries = document.getElementById('query-selection');
+            for (var i = 0; i < queries.length; i++) {
+                var query = queries[i];
+                var queryForm = document.getElementById(query.value);
+                if (queries.value == queryForm.id) {
+                    queryForm.style.display = '';
+                } else {
+                    queryForm.style.display = 'none';
+                }
+            }
+          }
+
+          toggleVisible();
+        </script>
+
       </div>
     </body>
   </body>
