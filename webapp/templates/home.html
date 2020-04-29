@@ -40,6 +40,7 @@
               <!--<p>Team Name: <input name="teamName" value=""> </p>-->
               <p>Team Name:
               <select name = "teamName">
+                <option selected>  </option>
                 {% for item in tNBA %}
                 <option  value = "{{item}}"> {{item}} </option>
                 {% endfor %}
@@ -57,6 +58,7 @@
               <!--<p>Team Name: <input name="teamName" value=""> </p>-->
               <p>Team Name:
               <select name = "teamName">
+                <option selected> </option>
                 {% for item in tNBA %}
                 <option  value = "{{item}}"> {{item}} </option>
                 {% endfor %}
@@ -73,6 +75,7 @@
               <!--<p>College: <input name="college" value=""> </p>-->
               <p>College:
                 <select name = "college">
+                <option  selected> </option>
                   {% for item in tCol %}
                   <option  value = "{{item}}"> {{item}} </option>
                   {% endfor %}
