@@ -6,7 +6,7 @@ CREATE VIEW max_individual_3ptm AS
     FROM player_stats
         JOIN team_stats ON ps_teamid=ts_id
         JOIN team ON t_id=ts_id
-    ORDER BY ps_3ptm DESC
+    ORDER BY ps_3ptm DESC;
 ALTER VIEW max_individual_3ptm OWNER TO jatt;
 
 --SELECT * FROM max_individual_3ptm;

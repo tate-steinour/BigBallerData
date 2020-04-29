@@ -6,7 +6,7 @@ CREATE VIEW philly_team_wins AS
     SELECT t_name, ts_season, ts_wins
     FROM team_stats
         JOIN team ON t_id=ts_id
-    ORDER BY ts_season
+    ORDER BY ts_season;
 ALTER VIEW philly_team_wins OWNER TO jatt;
 
 --SELECT * FROM philly_team_pts;

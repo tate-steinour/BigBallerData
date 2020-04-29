@@ -8,7 +8,7 @@ CREATE VIEW players_by_college AS
         JOIN player_stats ON p_name=ps_name
         JOIN team_stats ON ps_teamid=ts_id
         JOIN team ON ts_id=t_id
-    ORDER BY ps_season DESC
+    ORDER BY ps_season DESC;
 ALTER VIEW players_by_college OWNER TO jatt;
 
 --SELECT * FROM players_by_college;
