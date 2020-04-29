@@ -6,7 +6,7 @@
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     </head>
     <body>
-        <h3 id="title">Blocks by height</h3>
+        <h3 id="title">Avereage Blocks by Height</h3>
 
         
         <div id="container">
@@ -20,24 +20,6 @@
             <form action = "/">
                 <p><input type ="submit" value="Back"></p>
             </form>
-        
-            <!-- Table data -->
-
-            <h3>Table</h3>
-            <table>
-                <tr>
-                    <th class="tg-0lax">Season</th>
-                    <th class="tg-0pky">Height</th>
-                    <th class="tg-0pky">Average Number of Blocks</th>
-                </tr>
-                {% for row in queryData %}
-                <tr>
-                    <td>{{ row[0] }}</td>
-                    <td>{{ row[1] }}</td>
-                    <td>{{ row[2] }}</td>
-                </tr>
-                {% endfor %}
-            </table>
 
             <!-- Chart data -->
 
@@ -48,35 +30,38 @@
                 google.charts.load('current', { 'packages': ['corechart'] });
 
                 // Set a callback to run when the Google Visualization API is loaded.
-                google.charts.setOnLoadCallback(drawChart);
+                google.charts.setOnLoadCallback(drawSeriesChart);
 
                 // Callback that creates and populates a data table,
                 // instantiates the pie chart, passes in the data and
                 // draws it.
-                function drawChart() {
+                function drawSeriesChart() {
 
                     // Create the data table.
                     var data = new google.visualization.arrayToDataTable([
-                        ["Season" + " Height", "Blocks"],
+                        ['Height', 'Weight', 'Blocks', 'Rebounds'],
                         {% for row in queryData %}
-                            ["{{ row[0] }} {{ row[1] }}", {{ row[2] }}],
+                            ["{{ row[1] }}", "{{ row[2] }}", "{{ row[3] }}", "{{ row[4] }}"],
                         {% endfor %}
                     ]);
 
                 // Set chart options
                 var options = {
-                    'title': 'Average Height of Top ShotBlockers',
+                    'title': 'Average Height of Top ShotBlockers and Rebounders',
+                    hAxis: {title: 'Rebounds'},
+                    vAxis: {title: 'Blocks'},
+                    bubble: {textStyle: {fontSize: 11}},
                     'width': 800,
                     'height': 600,
                     'colors': ['#6a2c70']
                 };
 
                 // Instantiate and draw our chart, passing in some options.
-                var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+                var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
                 chart.draw(data, options);
                 }
             </script>
-            <div id="chart_div"></div>
+            <div id="series_chart_div"></div>
         </div>
     </body>
 </html>

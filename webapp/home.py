@@ -68,7 +68,7 @@ def get_blocks():
     SELECT * 
     FROM blocks_by_height
     WHERE ps_season = %s
-    ORDER BY ROUND DESC
+    ORDER BY blk DESC, reb DESC
     LIMIT %s;
     """
     cursor.execute(sql, (season, limit))
