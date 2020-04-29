@@ -26,19 +26,15 @@
             <h3>Table</h3>
             <table>
                 <tr>
-                    <th class="tg-0lax">Team</th>
-                    <th class="tg-0pky">Season</th>
-                    <th class="tg-0pky">Player</th>
-                    <th class="tg-0pky">Blocks</th>
+                    <th class="tg-0lax">Season</th>
                     <th class="tg-0pky">Height</th>
+                    <th class="tg-0pky">Average Number of Blocks</th>
                 </tr>
                 {% for row in queryData %}
                 <tr>
                     <td>{{ row[0] }}</td>
                     <td>{{ row[1] }}</td>
                     <td>{{ row[2] }}</td>
-                    <td>{{ row[3] }}</td>
-                    <td>{{ row[4] }}</td>
                 </tr>
                 {% endfor %}
             </table>
@@ -61,15 +57,15 @@
 
                     // Create the data table.
                     var data = new google.visualization.arrayToDataTable([
-                        ["Player" + " Height", "Blocks"],
+                        ["Season" + " Height", "Blocks"],
                         {% for row in queryData %}
-                            ["{{ row[2] }} {{ row[4] }}", {{ row[3] }}],
+                            ["{{ row[0] }} {{ row[1] }}", {{ row[2] }}],
                         {% endfor %}
                     ]);
 
                 // Set chart options
                 var options = {
-                    'title': 'Height of Top ShotBlockers',
+                    'title': 'Average Height of Top ShotBlockers',
                     'width': 800,
                     'height': 600,
                     'colors': ['#6a2c70']
