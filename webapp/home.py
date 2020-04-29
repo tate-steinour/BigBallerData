@@ -53,13 +53,9 @@ def get_blocks():
 
     cursor = getCursor()
     sql = """
-    SELECT DISTINCT t_name, ps_season, ps_name, ps_blck, p_height
-    FROM player_stats
-        JOIN team_stats ON ps_teamid=ts_id
-        JOIN team ON t_id=ts_id
-        JOIN player ON ps_name=p_name
-    WHERE ps_blck >= 1
-    AND ps_season = %s
+    SELECT * 
+    FROM blocks_by_height
+    WHERE ps_season = %s
     ORDER BY ps_blck DESC
     LIMIT %s;
     """
@@ -72,9 +68,8 @@ def get_blocks():
 def populate():
 
     sql = """
-    SELECT t_name, ts_season, ts_3ptm, ts_wins
-    FROM team_stats
-        JOIN team on t_id=ts_id
+    SELECT *
+    FROM three_ptm_wins
     WHERE ts_wins >= %s
         AND ts_season > %s
 		AND ts_season < %s
@@ -111,9 +106,8 @@ def populate():
 def wins_over_season():
 
     sql = """
-    SELECT t_name, ts_season, ts_wins
-    FROM team_stats
-        JOIN team ON t_id=ts_id
+    SELECT *
+    FROM philly_team_wins
     WHERE t_name= %s
     ORDER BY ts_season
     LIMIT %s;
@@ -167,10 +161,8 @@ def get_indiv_3ptm():
 
     cursor = getCursor()
     sql = """
-    SELECT DISTINCT t_name, ps_season, ps_name, ps_3ptm
-    FROM player_stats
-        JOIN team_stats ON ps_teamid=ts_id
-        JOIN team ON t_id=ts_id
+    SELECT *
+    FROM max_individual_3ptm
     WHERE t_name = %s
         AND ps_season = %s
     ORDER BY ps_3ptm DESC
@@ -184,11 +176,8 @@ def get_indiv_3ptm():
 def players_by_college():
 
     sql = """
-    SELECT DISTINCT p_name, ps_games, ps_season, t_name
-    FROM player
-        JOIN player_stats ON p_name=ps_name
-        JOIN team_stats ON ps_teamid=ts_id
-        JOIN team ON ts_id=t_id
+    SELECT *
+    FROM players_by_college
     WHERE p_college= %s
     ORDER BY ps_season DESC
     LIMIT %s;

@@ -10,7 +10,6 @@ CREATE VIEW blocks_by_height AS
         JOIN player ON ps_name=p_name
     WHERE ps_blck >= 1
     ORDER BY ps_blck DESC
-    LIMIT 10;
 ALTER VIEW blocks_by_height OWNER TO jatt;
 
 --SELECT * FROM blocks_by_height;
