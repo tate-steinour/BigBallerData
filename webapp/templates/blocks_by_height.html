@@ -21,8 +21,32 @@
                 <p><input type ="submit" value="Back"></p>
             </form>
 
-            <!-- Chart data -->
 
+            <h3>Table</h3>
+            <table>
+                <tr>
+                <th class="tg-0pky">Season</th>
+                <th class="tg-0pky">Height</th>
+                <th class="tg-0pky">Weight</th>
+                <th class="tg-0pky">Rebounds</th>
+                <th class="tg-0pky">Blocks</th>
+                </tr>
+                {% if queryData %}
+                {% for row in queryData %}
+                <tr>
+                <td class="tg-0pky">{{row[0]}}</td>
+                <td class="tg-0pky">{{row[1]}}</td>
+                <td class="tg-0pky">{{row[2]}}</td>
+                <td class="tg-0pky">{{row[3]}}</td>
+                <td class="tg-0pky">{{row[4]}}</td>
+            </tr>
+                {% endfor %}
+                {% endif %}
+            </table>
+
+
+
+            <!-- Chart data -->
             <h3>Chart</h3>
             <!--Load the AJAX API-->
             <script type="text/javascript">
@@ -39,21 +63,21 @@
 
                     // Create the data table.
                     var data = new google.visualization.arrayToDataTable([
-                        ['Height', 'Weight', 'Blocks', 'Rebounds'],
+                        ['Height', 'Rebounds', 'Blocks', 'Season', 'Weight'],
                         {% for row in queryData %}
-                            ["{{ row[1] }}", "{{ row[2] }}", "{{ row[3] }}", "{{ row[4] }}"],
+                            ['{{row[1]}}', {{row[3]}}, {{row[4]}}, '{{row[0]}}', {{row[2]}}],
                         {% endfor %}
                     ]);
 
                 // Set chart options
                 var options = {
-                    'title': 'Average Height of Top ShotBlockers and Rebounders',
+                    title: 'Average Height of Top ShotBlockers and Rebounders',
                     hAxis: {title: 'Rebounds'},
                     vAxis: {title: 'Blocks'},
                     bubble: {textStyle: {fontSize: 11}},
-                    'width': 800,
-                    'height': 600,
-                    'colors': ['#6a2c70']
+                    width: 1000,
+                    height: 800,
+                    colors: ['#6a2c70']
                 };
 
                 // Instantiate and draw our chart, passing in some options.
