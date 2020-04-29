@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Blocks by Height</title>
+        <title>Blocks/Rebounds</title>
         <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     </head>
     <body>
-        <h3 id="title">Avereage Blocks by Height</h3>
+        <h3 id="title">Average Blocks/Rebounds by Height, Weight, and Season</h3>
 
         
         <div id="container">
@@ -14,36 +14,12 @@
             <!-- Query Form -->
             <form action = "/Blocks_by_height">
                 <p>Season: <input name="season" value="{{season}}"> </p>
-                <p>Limit result: <input name="limit" value="{{limit}}"> </p>
+                <p>Season: <input name="season2" value="{{season2}}"> </p>
                 <p><input type="submit"></p>
             </form>
             <form action = "/">
                 <p><input type ="submit" value="Back"></p>
             </form>
-
-
-            <h3>Table</h3>
-            <table>
-                <tr>
-                <th class="tg-0pky">Season</th>
-                <th class="tg-0pky">Height</th>
-                <th class="tg-0pky">Weight</th>
-                <th class="tg-0pky">Rebounds</th>
-                <th class="tg-0pky">Blocks</th>
-                </tr>
-                {% if queryData %}
-                {% for row in queryData %}
-                <tr>
-                <td class="tg-0pky">{{row[0]}}</td>
-                <td class="tg-0pky">{{row[1]}}</td>
-                <td class="tg-0pky">{{row[2]}}</td>
-                <td class="tg-0pky">{{row[3]}}</td>
-                <td class="tg-0pky">{{row[4]}}</td>
-            </tr>
-                {% endfor %}
-                {% endif %}
-            </table>
-
 
 
             <!-- Chart data -->
@@ -75,9 +51,9 @@
                     hAxis: {title: 'Rebounds'},
                     vAxis: {title: 'Blocks'},
                     bubble: {textStyle: {fontSize: 11}},
-                    width: 1000,
-                    height: 800,
-                    colors: ['#6a2c70']
+                    width: 800,
+                    height: 600,
+                    colors: ['#6a2c70', 'gold']
                 };
 
                 // Instantiate and draw our chart, passing in some options.

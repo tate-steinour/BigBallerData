@@ -52,14 +52,12 @@ def getColleges():
 @app.route('/Blocks_by_height')
 def get_blocks():
     season = request.args.get("season", "")
-    limit = request.args.get("limit", "")
+    season2 = request.args.get("season2", "")
 
-    if not limit.isdigit() or int(limit) < 1:
-        limit = 10
-    if(not season.isdigit()):
+    if(not season.isdigit() or not season2.isdigit()):
         flash('Please enter valid numerical inputs')
         return redirect('/')
-    if(not valid_year(season)):
+    if(not valid_year(season) or not valid_year(season2)):
         flash('Please enter a valid season, between 2000 and 2017 inclusive')
         return redirect('/')
 
@@ -68,12 +66,12 @@ def get_blocks():
     SELECT * 
     FROM blocks_by_height
     WHERE ps_season = %s
-    ORDER BY blk DESC, reb DESC
-    LIMIT %s;
+    OR ps_season = %s
+    ORDER BY blk DESC, reb DESC;
     """
-    cursor.execute(sql, (season, limit))
+    cursor.execute(sql, (season,season2))
     queryData = cursor.fetchall()
-    return render_template('blocks_by_height.html', queryData=queryData, season = season, limit = limit)
+    return render_template('blocks_by_height.html', queryData=queryData, season=season, season2=season2)
 
 
 @app.route('/three_ptm_wins')

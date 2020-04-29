@@ -18,7 +18,7 @@
       <div id="container">
 
         <select id="query-selection" onchange="toggleVisible()">
-            <option value="blocks-by-height">Blocks By Height</option>
+            <option value="blocks-by-height">Blocks/Rebounds</option>
             <option value="max-indiv-3ptm">Max Individual Three-Pointers Made</option>
             <option value="num-wins">Number of Wins Over Seasons</option>
             <option value="players-by-college">Players By College</option>
@@ -26,10 +26,10 @@
         </select>
 
         <div id="blocks-by-height">
-          <h3>Blocks by height</h3>
+          <h3>Average Blocks/Rebounds by Height, Weight, and Season</h3>
           <form action = "/Blocks_by_height">
               <p>Season: <input name="season" value=""> </p>
-              <p>Limit result: <input name="limit" value="10"> </p>
+              <p>Season: <input name="season2" value=""> </p>
               <p><input type="submit"></p>
           </form>
         </div>
