@@ -7,7 +7,9 @@ app.secret_key = 'jatt'
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    tNBA = getTeams()
+    tCol = getColleges()
+    return render_template('home.html', tNBA = tNBA, tCol = tCol)
 
 def valid_year(year_str):
     y = int(year_str)
@@ -20,7 +22,12 @@ def getCursor():
 def getTeams():
     list = []
     cursor = getCursor()
-    sql = "SELECT t_name FROM team"
+    sql = """
+    SELECT DISTINCT t_name
+    FROM team
+    WHERE t_name IS NOT NULL
+    ORDER BY t_name ASC
+    """
     cursor.execute(sql, ())
     queryData = cursor.fetchall()
     for row in queryData:
@@ -30,7 +37,12 @@ def getTeams():
 def getColleges():
     list = []
     cursor = getCursor()
-    sql = "SELECT p_college FROM player"
+    sql = """
+    SELECT DISTINCT p_college 
+    FROM player
+    WHERE p_college IS NOT NULL
+    ORDER BY p_college ASC
+    """
     cursor.execute(sql, ())
     queryData = cursor.fetchall()
     for row in queryData:
