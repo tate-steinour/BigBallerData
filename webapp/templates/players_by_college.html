@@ -11,7 +11,16 @@
 <div id="container">
     <h3>Players by college</h3>
     <form action = "/players_by_college">
-        <p>College: <input name="college" value="{{college}}"> </p>
+        <!--<p>College: <input name="college" value="{{college}}"> </p>-->
+        <p>College:
+            <select name = "college">
+            <option  selected> </option>
+              {% for item in tCol %}
+              <option  value = "{{item}}"> {{item}} </option>
+              {% endfor %}
+            </select>              
+          </p>
+
         <p>Limit result: <input name="limit" value="{{limit}}"> </p>
         <p><input type="submit"></p>
     </form>
