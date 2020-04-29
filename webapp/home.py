@@ -149,7 +149,8 @@ def wins_over_season():
         #newR.append(temp[1])
         newR.append(row[2])
         newdat.append(newR)
-    return render_template('team_wins_by_season.html', dat=newdat, teamName=teamName, limit=limit)
+        tNBA = getTeams()
+    return render_template('team_wins_by_season.html',tNBA = tNBA, dat=newdat, teamName=teamName, limit=limit)
 
 
 @app.route('/max_individual_3ptm')
@@ -182,7 +183,8 @@ def get_indiv_3ptm():
     """
     cursor.execute(sql, (teamName, season, limit))
     queryData = cursor.fetchall()
-    return render_template('max_individual_3ptm.html', queryData = queryData, teamName=teamName, season=season, limit=limit)
+    tNBA = getTeams()
+    return render_template('max_individual_3ptm.html',tNBA = tNBA, queryData = queryData, teamName=teamName, season=season, limit=limit)
 
 @app.route('/players_by_college')
 def players_by_college():
@@ -209,4 +211,5 @@ def players_by_college():
     cur = getCursor()
     cur.execute(sql, (college, limit))
     dat = cur.fetchall()
-    return render_template("players_by_college.html", dat=dat, college = college, limit = limit)
+    tCol = getColleges()
+    return render_template("players_by_college.html", dat=dat, college = college, limit = limit, tCol = tCol)
