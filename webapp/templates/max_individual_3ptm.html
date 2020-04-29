@@ -11,7 +11,15 @@
   <h3 id="title">Max Individual 3ptms</h3>
   <div id="container">
     <form action="/max_individual_3ptm">
-        <p>Team Name: <input name="teamName" value="{{teamName}}"> </p>
+        <!--<p>Team Name: <input name="teamName" value="{{teamName}}"> </p>-->
+        <p>Team Name:
+            <select name = "teamName">
+              <option selected>  </option>
+              {% for item in tNBA %}
+              <option  value = "{{item}}"> {{item}} </option>
+              {% endfor %}
+            </select>
+            </p>
         <p>Season: <input name="season" value="{{season}}"> </p>
         <p>Limit result: <input name="limit" value="{{limit}}"> </p>
         <p><input type="submit"></p>
