@@ -176,7 +176,7 @@ def get_indiv_3ptm():
 def players_by_college():
 
     sql = """
-    SELECT *
+    SELECT DISTINCT p_name, ps_games, ps_season, t_name
     FROM players_by_college
     WHERE p_college= %s
     ORDER BY ps_season DESC

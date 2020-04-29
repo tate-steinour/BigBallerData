@@ -3,7 +3,7 @@
 
 DROP VIEW IF EXISTS players_by_college;
 CREATE VIEW players_by_college AS
-    SELECT DISTINCT p_name, ps_games, ps_season, t_name
+    SELECT DISTINCT p_college, p_name, ps_games, ps_season, t_name
     FROM player
         JOIN player_stats ON p_name=ps_name
         JOIN team_stats ON ps_teamid=ts_id
