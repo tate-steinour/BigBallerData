@@ -107,7 +107,7 @@ def wins_over_season():
 
     sql = """
     SELECT *
-    FROM philly_team_wins
+    FROM team_wins_over_seasons
     WHERE t_name= %s
     ORDER BY ts_season
     LIMIT %s;
