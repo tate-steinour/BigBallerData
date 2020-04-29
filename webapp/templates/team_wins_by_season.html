@@ -11,7 +11,17 @@
 
 <div id="container">
     <form action = "/team_wins_over_seasons">
-        <p>Team Name: <input name="teamName" value="{{teamName}}"> </p>
+        <!--<p>Team Name: <input name="teamName" value="{{teamName}}"> </p>-->
+
+        <p>Team Name:
+            <select name = "teamName">
+              <option selected>  </option>
+              {% for item in tNBA %}
+              <option  value = "{{item}}"> {{item}} </option>
+              {% endfor %}
+            </select>
+            </p>
+
         <p>Limit result: <input name="limit" value="{{limit}}"> </p>
         <p><input type="submit"></p>
     </form>
