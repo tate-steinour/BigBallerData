@@ -37,7 +37,14 @@
         <div id="max-indiv-3ptm">
           <h3>Max Individual 3 pointers made</h3>
           <form action = "/max_individual_3ptm">
-              <p>Team Name: <input name="teamName" value=""> </p>
+              <!--<p>Team Name: <input name="teamName" value=""> </p>-->
+              <p>Team Name:
+              <select name = "teamName">
+                {% for item in tNBA %}
+                <option  value = "{{item}}"> {{item}} </option>
+                {% endfor %}
+              </select>
+              </p>
               <p>Season: <input name="season" value=""> </p>
               <p>Limit result: <input name="limit" value="10"> </p>
               <p><input type="submit"></p>
@@ -47,7 +54,14 @@
         <div id="num-wins">
           <h3>Number of wins over the seasons</h3>
           <form action = "/team_wins_over_seasons">
-              <p>Team Name: <input name="teamName" value=""> </p>
+              <!--<p>Team Name: <input name="teamName" value=""> </p>-->
+              <p>Team Name:
+              <select name = "teamName">
+                {% for item in tNBA %}
+                <option  value = "{{item}}"> {{item}} </option>
+                {% endfor %}
+              </select>
+              </p>
               <p>Limit result: <input name="limit" value="10"> </p>
               <p><input type="submit"></p>
           </form> 
@@ -56,7 +70,14 @@
         <div id="players-by-college">
           <h3>Players by college</h3>
           <form action = "/players_by_college">
-              <p>College: <input name="college" value=""> </p>
+              <!--<p>College: <input name="college" value=""> </p>-->
+              <p>College:
+                <select name = "college">
+                  {% for item in tCol %}
+                  <option  value = "{{item}}"> {{item}} </option>
+                  {% endfor %}
+                </select>              
+              </p>
               <p>Limit result: <input name="limit" value="10"> </p>
               <p><input type="submit"></p>
           </form>
