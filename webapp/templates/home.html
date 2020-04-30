@@ -38,9 +38,10 @@
           <h3>3 pointers Made by Player</h3>
           <form action = "/max_individual_3ptm">
               <!--<p>Team Name: <input name="teamName" value=""> </p>-->
-              <p>Team Name:
-              <select name = "teamName">
-                <option selected>  </option>
+              <p>Team Name:</p>
+              <p>
+              <select name = "teamName" id="query-selection">
+                <option selected> </option>
                 {% for item in tNBA %}
                 <option  value = "{{item}}"> {{item}} </option>
                 {% endfor %}
@@ -56,8 +57,9 @@
           <h3>Wins over Seasons</h3>
           <form action = "/team_wins_over_seasons">
               <!--<p>Team Name: <input name="teamName" value=""> </p>-->
-              <p>Team Name:
-              <select name = "teamName">
+              <p>Team Name:</p>
+              <p>            
+                <select name = "teamName" id="query-selection">
                 <option selected> </option>
                 {% for item in tNBA %}
                 <option  value = "{{item}}"> {{item}} </option>
@@ -73,8 +75,9 @@
           <h3>Players by college</h3>
           <form action = "/players_by_college">
               <!--<p>College: <input name="college" value=""> </p>-->
-              <p>College:
-                <select name = "college">
+              <p>College:</p>
+              <p>
+                <select name = "college" id="query-selection">
                 <option  selected> </option>
                   {% for item in tCol %}
                   <option  value = "{{item}}"> {{item}} </option>

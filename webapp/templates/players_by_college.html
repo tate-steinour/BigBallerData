@@ -12,8 +12,9 @@
     <h3>Players by college</h3>
     <form action = "/players_by_college">
         <!--<p>College: <input name="college" value="{{college}}"> </p>-->
-        <p>College:
-            <select name = "college">
+        <p>College:</p>
+          <p>
+            <select name = "college" id="query-selection">
             <option  selected> </option>
               {% for item in tCol %}
               <option  value = "{{item}}"> {{item}} </option>

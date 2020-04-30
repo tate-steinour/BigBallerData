@@ -11,8 +11,9 @@
   <h3 id="title">Most 3 Pointers by Player per Team</h3>
   <div id="container">
     <form action="/max_individual_3ptm">
-        <p>Team Name:
-            <select name = "teamName">
+        <p>Team Name:</p>
+        <p>
+            <select name = "teamName" id="query-selection">
               <option selected>  </option>
               {% for item in tNBA %}
               <option  value = "{{item}}"> {{item}} </option>

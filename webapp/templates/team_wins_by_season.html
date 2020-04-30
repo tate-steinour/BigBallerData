@@ -12,9 +12,9 @@
 <div id="container">
     <form action = "/team_wins_over_seasons">
         <!--<p>Team Name: <input name="teamName" value="{{teamName}}"> </p>-->
-
-        <p>Team Name:
-            <select name = "teamName">
+        <p>Team Name:</p>
+        <p>
+            <select name = "teamName"  id="query-selection">
               <option selected>  </option>
               {% for item in tNBA %}
               <option  value = "{{item}}"> {{item}} </option>
