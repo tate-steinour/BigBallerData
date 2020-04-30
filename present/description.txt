@@ -1,2 +1,1 @@
-Please write a 1-2 line description of your project.
-See http://apps4va.cs.jmu.edu/2017/ for examples.
+Big Baller Data is a stats aggregator that allows one to compare NBA teams and players in an array of statistical categories.
