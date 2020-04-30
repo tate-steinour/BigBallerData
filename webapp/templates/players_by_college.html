@@ -15,7 +15,7 @@
         <p>College:</p>
           <p>
             <select name = "college" id="query-selection">
-            <option  selected> </option>
+            <option  selected value = "college"> {{college}} </option>
               {% for item in tCol %}
               <option  value = "{{item}}"> {{item}} </option>
               {% endfor %}

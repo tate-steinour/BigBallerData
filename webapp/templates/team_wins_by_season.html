@@ -15,7 +15,7 @@
         <p>Team Name:</p>
         <p>
             <select name = "teamName"  id="query-selection">
-              <option selected>  </option>
+            <option  selected  value = teamName > {{teamName}}</option>
               {% for item in tNBA %}
               <option  value = "{{item}}"> {{item}} </option>
               {% endfor %}
