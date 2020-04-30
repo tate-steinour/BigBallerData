@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
-<body>
+<body style="background-color: antiquewhite;">
 
 <h3 id="title">3ptm Wins</h3>
 
@@ -22,29 +22,8 @@
     <form action = "/">
         <p><input type ="submit" value="Back"></p>
     </form>
-    <h3>Table</h3>
-    <table>
-        <tr>
-        <th class="tg-0pky">t_name</th>
-        <th class="tg-0pky">ts_season</th>
-        <th class="tg-0pky">ts_3ptm</th>
-        <th class="tg-0pky">ts_wins</th>
-        </tr>
-        {% if dat %}
-        {% for row in dat %}
-        <tr>
-        <td class="tg-0pky">{{row[0]}}</td>
-        <td class="tg-0pky">{{row[1]}}</td>
-        <td class="tg-0pky">{{row[2]}}</td>
-        <td class="tg-0pky">{{row[3]}}</td>
-    </tr>
-        {% endfor %}
-        {% endif %}
-    </table>
 
     <h3>Chart</h3>
-
-
 
     <div id="chart_div"></div>
 

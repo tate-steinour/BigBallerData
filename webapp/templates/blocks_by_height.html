@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     </head>
-    <body>
+    <body style="background-color: antiquewhite;">
         <h3 id="title">Average Blocks/Rebounds by Height, Weight, and Season</h3>
 
         
@@ -23,7 +23,7 @@
 
 
             <!-- Chart data -->
-            <h3>Chart</h3>
+            <h3>Bubble Chart</h3>
             <!--Load the AJAX API-->
             <script type="text/javascript">
                 // Load the Visualization API and the corechart package.
@@ -47,7 +47,7 @@
 
                 // Set chart options
                 var options = {
-                    title: 'Average Height of Top ShotBlockers and Rebounders',
+                    title: 'Average Height/Weight of Top ShotBlockers and Rebounders',
                     hAxis: {title: 'Rebounds'},
                     vAxis: {title: 'Blocks'},
                     bubble: {textStyle: {fontSize: 11}},
