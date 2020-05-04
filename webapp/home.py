@@ -9,7 +9,8 @@ app.secret_key = 'jatt'
 def home():
     tNBA = getTeams()
     tCol = getColleges()
-    return render_template('home.html', tNBA = tNBA, tCol = tCol)
+    tCat = getCategories()
+    return render_template('home.html', tNBA=tNBA, tCol=tCol, tCat=tCat)
 
 def valid_year(year_str):
     y = int(year_str)
@@ -26,7 +27,7 @@ def getTeams():
     SELECT DISTINCT t_name
     FROM team
     WHERE t_name IS NOT NULL
-    ORDER BY t_name ASC
+    ORDER BY t_name ASC;
     """
     cursor.execute(sql, ())
     queryData = cursor.fetchall()
@@ -41,13 +42,18 @@ def getColleges():
     SELECT DISTINCT p_college 
     FROM player
     WHERE p_college IS NOT NULL
-    ORDER BY p_college ASC
+    ORDER BY p_college ASC;
     """
     cursor.execute(sql, ())
     queryData = cursor.fetchall()
     for row in queryData:
         list.append(row[0])
     return list
+
+def getCategories():
+    list = ['Points', 'Rebounds', 'Assists', 'Turnovers', 'Steals', '3-Pointers made', 'Free Throws made']
+    return list
+
 
 @app.route('/Blocks_by_height')
 def get_blocks():
@@ -116,13 +122,14 @@ def populate():
 def wins_over_season():
 
     sql = """
-    SELECT *
+    SELECT t_name, ts_season, ts_wins, %s
     FROM team_wins_over_seasons
     WHERE t_name= %s
     ORDER BY ts_season;
     """
 
     teamName = request.args.get("teamName", "")
+    cat = request.args.get("category", "")
 
     # set defaults
     teamNameList = getTeams()
@@ -130,8 +137,27 @@ def wins_over_season():
         flash('Please enter a valid team name from the list')
         return redirect('/')
 
+    if cat == 'Points':
+        catQ = 'ts_pts'
+    elif cat == 'Rebounds':
+        catQ = 'ts_reb'
+    elif cat == 'Assists':
+        catQ = 'ts_ast'
+    elif cat == 'Steals':
+        catQ = 'ts_stl'
+    elif cat == 'Turnovers':
+        catQ = 'ts_tov'
+    elif cat == 'Free Throws made':
+        catQ = 'ts_ftm'
+    elif cat == '3-Pointers made':
+        catQ = 'ts_3ptm'
+    else:
+        flash('Please enter a valid statistical category from the list')
+        return redirect('/')
+    
+
     cur = getCursor()
-    cur.execute(sql, (teamName,))
+    cur.execute(sql, (catQ, teamName))
     dat = cur.fetchall()
     newdat = []
     for row in dat:
@@ -143,7 +169,8 @@ def wins_over_season():
         newR.append(row[2])
         newdat.append(newR)
         tNBA = getTeams()
-    return render_template('team_wins_by_season.html',tNBA = tNBA, dat=newdat, teamName=teamName)
+        tCat = getCategories()
+    return render_template('team_wins_by_season.html', tNBA=tNBA, dat=newdat, teamName=teamName, cat=cat, tCat=tCat)
 
 
 @app.route('/max_individual_3ptm')

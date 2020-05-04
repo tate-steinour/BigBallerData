@@ -11,18 +11,24 @@
 
 <div id="container">
     <form action = "/team_wins_over_seasons">
-        <!--<p>Team Name: <input name="teamName" value="{{teamName}}"> </p>-->
         <p>Team Name:</p>
         <p>
             <select name = "teamName"  id="query-selection">
-            <option  selected  value = teamName > {{teamName}}</option>
+            <option  selected  value=teamName> {{teamName}}</option>
               {% for item in tNBA %}
               <option  value = "{{item}}"> {{item}} </option>
               {% endfor %}
             </select>
             </p>
-
-        <p>Limit result: <input name="limit" value="{{limit}}"> </p>
+            <p>Statistical Category:</p>
+            <p>            
+              <select name="category" id="query-selection">
+              <option selected value=cat>{{cat}}</option>
+              {% for item2 in tCat %}
+              <option  value = "{{item2}}"> {{item2}} </option>
+              {% endfor %}
+            </select>
+            </p>
         <p><input type="submit"></p>
     </form>
     <form action = "/">
@@ -31,7 +37,7 @@
 
     <br>
     <br>
-    <h3>Line Chart</h3>
+    <h3>TimeLine</h3>
 
     <div id="chart_div"></div>
 
@@ -42,7 +48,7 @@
         function drawChart() {
         var data = google.visualization.arrayToDataTable([
             ['Season', 'Wins'],
-            {% for row in dat%}
+            {% for row in dat %}
             [{{row[1]}}, {{row[2]}}],
             {% endfor %}
         ]);
@@ -62,6 +68,5 @@
         }
     </script>
 </div>
-
 </body>
 </html>
