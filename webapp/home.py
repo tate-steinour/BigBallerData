@@ -119,23 +119,19 @@ def wins_over_season():
     SELECT *
     FROM team_wins_over_seasons
     WHERE t_name= %s
-    ORDER BY ts_season
-    LIMIT %s;
+    ORDER BY ts_season;
     """
 
     teamName = request.args.get("teamName", "")
-    limit = request.args.get("limit", "")
-    # set defaults
-    if not limit.isdigit() or int(limit) < 1:
-        limit = 10
 
+    # set defaults
     teamNameList = getTeams()
     if(not teamName in teamNameList):
         flash('Please enter a valid team name from the list')
         return redirect('/')
 
     cur = getCursor()
-    cur.execute(sql, (teamName, limit))
+    cur.execute(sql, (teamName,))
     dat = cur.fetchall()
     newdat = []
     for row in dat:
@@ -144,11 +140,10 @@ def wins_over_season():
         season = row[1]
         temp = season.split("-")
         newR.append(temp[0])
-        #newR.append(temp[1])
         newR.append(row[2])
         newdat.append(newR)
         tNBA = getTeams()
-    return render_template('team_wins_by_season.html',tNBA = tNBA, dat=newdat, teamName=teamName, limit=limit)
+    return render_template('team_wins_by_season.html',tNBA = tNBA, dat=newdat, teamName=teamName)
 
 
 @app.route('/max_individual_3ptm')
