@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Players by College</title>
+    <title>College</title>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body style="background-color: antiquewhite;">
 
-<h3 id="title">Players By College</h3>
+<h3 id="title">NBA Players By College</h3>
 <div id="container">
-    <h3>Players by college</h3>
     <form action = "/players_by_college">
-        <!--<p>College: <input name="college" value="{{college}}"> </p>-->
         <p>College:</p>
           <p>
             <select name = "college" id="query-selection">
@@ -21,8 +19,15 @@
               {% endfor %}
             </select>              
           </p>
-
-        <p>Limit result: <input name="limit" value="{{limit}}"> </p>
+          <p>Second College:</p>
+          <p>
+            <select name = "college2" id="query-selection">
+            <option  selected value = "college2"> {{college2}} </option>
+              {% for item2 in tCol %}
+              <option  value = "{{item2}}"> {{item2}} </option>
+              {% endfor %}
+            </select>              
+          </p>
         <p><input type="submit"></p>
     </form>
     <form action="/">
@@ -30,42 +35,15 @@
     </form>
     <br>
 
-    <h3>Table</h3>
-
-    <table>
-    <colgroup>
-    <col style="width: 130px">
-    <col style="width: 56px">
-    <col style="width: 213px">
-    <col style="width: 153px">
-    </colgroup>
-    <tr>
-        <th class="tg-0lax">Name</th>
-        <th class="tg-0pky">GP</th>
-        <th class="tg-0pky">Team</th>
-        <th class="tg-0pky">Season</th>
-    </tr>
-    {% for row in dat %}
-    <tr>
-        <td class="tg-0lax">{{row[0]}}</td>
-        <td class="tg-0lax">{{row[1]}}</td>
-        <td class="tg-0lax">{{row[3]}}</td>
-        <td class="tg-0lax">{{row[2]}}</td>
-    </tr>
-    {% endfor %}
-    </table>
-
     <br>
     <br>
-    <h3>Chart</h3>
-
     <head>
         <!--Load the AJAX API-->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript">
 
         // Load the Visualization API and the corechart package.
-        google.charts.load('current', {'packages':['corechart']});
+        google.charts.load('current', {'packages':['corechart', 'bar']});
 
         // Set a callback to run when the Google Visualization API is loaded.
         google.charts.setOnLoadCallback(drawChart);
@@ -76,31 +54,36 @@
         function drawChart() {
 
             // Create the data table.
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Player');
-            data.addColumn('number', 'Games Played');
-            data.addRows([
-            {% for row in dat %}
-            ['{{row[0]}} {{row[2]}} {{row[3]}}',{{row[1]}}],
-            {% endfor %}
+            var data = new google.visualization.arrayToDataTable([
+                ['Season', 'Count', { role: "style" }],
+                {% for row in dat %}
+                    {% if row[1] == college %}
+                        ['{{row[1]}} {{row[2]}}', {{row[0]}}, 'stroke-color: #703593; stroke-width: 4; fill-color: #C5A5CF'],
+                    {% else %}
+                        ['{{row[1]}} {{row[2]}}', {{row[0]}}, 'stroke-color: #D4AF37; stroke-width: 4; fill-color: #bba58e'],
+                    {% endif %}
+                {% endfor %}
             ]);
 
             // Set chart options
-            var options = {'title':'{{college}} Players in the NBA',
-                        'width':888,
-                        'height':666,
-                        chartArea: {  width: "50%", height: "70%" },
-                        'colors': ['#6a2c70']
-                        };
+            var options = {
+                title: "Active Players in NBA from {{college}} and {{college2}}",   
+                bar: {groupWidth: "90%"},
+                legend: {position: "none"},
+                hAxis: {title: 'School/Season'},
+                vAxis: {title: 'Active Players'},
+                annotations: {textStyle: {fontSize: 10}},
+            };
 
             // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+            var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_material'));
             chart.draw(data, options);
         }
         </script>
     </head>
 
     <!--Div that will hold the pie chart-->
-    <div id="chart_div"></div>
+    <div id="columnchart_material" style="width: 800px; height: 600px;"></div>
 </div>
+</body>
 </html>

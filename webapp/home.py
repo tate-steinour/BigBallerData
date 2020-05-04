@@ -155,12 +155,8 @@ def wins_over_season():
 def get_indiv_3ptm():
     teamName = request.args.get("teamName","")
     season = request.args.get("season","")
-    limit = request.args.get("limit", "")
     
     #set defaults
-    if not limit.isdigit() or int(limit) < 1:
-        limit = 10
-
     if (not season.isdigit() or not valid_year(season)):
         flash('Please enter a valid season, between 2000 and 2017 inclusive')
         return redirect('/')
@@ -176,38 +172,37 @@ def get_indiv_3ptm():
     FROM max_individual_3ptm
     WHERE t_name = %s
         AND ps_season = %s
-    ORDER BY ps_3ptm DESC
-    LIMIT %s;
+        AND ps_3ptm > 0
+    ORDER BY ps_3ptm DESC;
     """
-    cursor.execute(sql, (teamName, season, limit))
+    cursor.execute(sql, (teamName, season))
     queryData = cursor.fetchall()
     tNBA = getTeams()
-    return render_template('max_individual_3ptm.html',tNBA = tNBA, queryData = queryData, teamName=teamName, season=season, limit=limit)
+    return render_template('max_individual_3ptm.html',tNBA = tNBA, queryData = queryData, teamName=teamName, season=season)
 
 @app.route('/players_by_college')
 def players_by_college():
 
     sql = """
-    SELECT DISTINCT p_name, ps_games, ps_season, t_name
+    SELECT COUNT(DISTINCT p_name), p_college, ps_season
     FROM players_by_college
-    WHERE p_college= %s
-    ORDER BY ps_season DESC
-    LIMIT %s;
+    WHERE (p_college= %s
+    OR p_college=%s)
+    AND ps_season > 2006
+    GROUP BY ps_season, p_college
+    ORDER BY ps_season ASC;
     """
 
     college = request.args.get("college", "")
-    limit = request.args.get("limit", "")
+    college2 = request.args.get("college2", "")
     # set defaults
-    if not limit.isdigit() or int(limit) < 1:
-        limit = 10
-
     collegeNameList = getColleges()
-    if(not college in collegeNameList):
+    if(not college in collegeNameList or not college2 in collegeNameList):
         flash('Please enter a valid college name from the list')
         return redirect('/')
 
     cur = getCursor()
-    cur.execute(sql, (college, limit))
+    cur.execute(sql, (college, college2))
     dat = cur.fetchall()
     tCol = getColleges()
-    return render_template("players_by_college.html", dat=dat, college = college, limit = limit, tCol = tCol)
+    return render_template("players_by_college.html", dat=dat, college=college, college2=college2, tCol=tCol)
