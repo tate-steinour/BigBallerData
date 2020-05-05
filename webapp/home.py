@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, flash, get_flashed_messages
 import psycopg2
+from psycopg2 import sql
 
 app = Flask(__name__)
 
@@ -121,13 +122,6 @@ def populate():
 @app.route('/team_wins_over_seasons')
 def wins_over_season():
 
-    sql = """
-    SELECT t_name, ts_season, ts_wins, %s
-    FROM team_wins_over_seasons
-    WHERE t_name= %s
-    ORDER BY ts_season;
-    """
-
     teamName = request.args.get("teamName", "")
     cat = request.args.get("category", "")
 
@@ -154,10 +148,16 @@ def wins_over_season():
     else:
         flash('Please enter a valid statistical category from the list')
         return redirect('/')
-    
+
+    query = sql.SQL("""
+    SELECT t_name, ts_season, ts_wins, {col}
+    FROM team_wins_over_seasons
+    WHERE t_name= %s
+    ORDER BY ts_season;
+    """).format(col=sql.Identifier(catQ))
 
     cur = getCursor()
-    cur.execute(sql, (catQ, teamName))
+    cur.execute(query, (teamName, ))
     dat = cur.fetchall()
     newdat = []
     for row in dat:
@@ -167,6 +167,7 @@ def wins_over_season():
         temp = season.split("-")
         newR.append(temp[0])
         newR.append(row[2])
+        newR.append(row[3])
         newdat.append(newR)
         tNBA = getTeams()
         tCat = getCategories()

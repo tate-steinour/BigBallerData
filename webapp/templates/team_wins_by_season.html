@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Team Win Totals</title>
+    <title>Wins vs Stats</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
 </head>
 <body style="background-color: antiquewhite;">
 
-<h3 id="title">Wins by Season</h3>
+<h3 id="title">Wins to Stat Correlation</h3>
 
 <div id="container">
     <form action = "/team_wins_over_seasons">
@@ -35,38 +35,62 @@
         <p><input type ="submit" value="Back"></p>
     </form>
 
-    <br>
-    <br>
-    <h3>TimeLine</h3>
-
-    <div id="chart_div"></div>
 
     <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(drawChart2);
 
         function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Season', 'Wins'],
-            {% for row in dat %}
-            [{{row[1]}}, {{row[2]}}],
-            {% endfor %}
-        ]);
+            var data = google.visualization.arrayToDataTable([
+                ['Season', 'Wins'],
+                {% for row in dat %}
+                [{{row[1]}}, {{row[2]}}],
+                {% endfor %}
+            ]);
 
-        var options = {
-            title: '{{dat[0][0]}} Wins From 2000-01 to 2018-19',
-            curveType: 'function',
-            width: 800,
-            hAxis: { format: ' '},
-            legend: { position: 'bottom' },
-            'colors': ['#6a2c70']
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-
-        chart.draw(data, options);
+            var options = {
+                title: '{{dat[0][0]}} Wins From 2000-01 to 2018-19',
+                curveType: 'function',
+                width: 800,
+                hAxis: { format: ' '},
+                legend: { position: 'bottom' },
+                'colors': ['#6a2c70']
+            };
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
         }
-    </script>
+
+        function drawChart2() {
+            var data = google.visualization.arrayToDataTable([
+                ['Season', '{{cat}}'],
+                {% for row in dat %}
+                [{{row[1]}}, {{row[3]}}],
+                {% endfor %}
+            ]);
+
+            var options = {
+                title: '{{dat[0][0]}} {{cat}} per Game From 2000-01 to 2018-19',
+                curveType: 'function',
+                width: 800,
+                hAxis: { format: ' '},
+                legend: { position: 'bottom' },
+                'colors': ['red']
+            };
+            var chart2 = new google.visualization.LineChart(document.getElementById('chart_div2'));
+            chart2.draw(data, options);
+        }
+    </script>   
+
+    <br>
+    <br>
+    <h3>Wins TimeLine</h3>
+    <div id="chart_div"></div>
+
+    <br>
+    <h3>{{cat}} per Game Timeline</h3>
+    <div id="chart_div2" style="margin-left: -160px;"></div>
+    <br>
 </div>
 </body>
 </html>

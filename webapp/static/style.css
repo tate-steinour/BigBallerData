@@ -48,6 +48,10 @@ input[type=submit]:hover {
     margin-left: -10em;
 }
 
+#chart_div2 {
+    margin-left: -10em;
+}
+
 #series_chart_div {
     margin-left: -10em;
 }
