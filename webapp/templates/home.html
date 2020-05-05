@@ -15,6 +15,9 @@
       {% endif %}
       {% endwith %}
       <h2 id="title">Big Baller Data</h2>
+      <img src="static/nba.png" alt-="NBA logo" style="width: 175px; height: 200px; 
+      border-radius: 10px; display: block; margin-left: auto; margin-right: auto;">
+      <br>
       <div id="container">
 
         <select id="query-selection" onchange="toggleVisible()">
@@ -32,6 +35,12 @@
               <p>Season: <input name="season2" value=""> </p>
               <p><input type="submit"></p>
           </form>
+          <br>
+          <p style="text-align: center;">
+            This search reveals the relationship, if any, between player height, weight
+            and the number of rebounds and blocks they average per game. One is able to compare
+            these results across different seasons.
+          </p>
         </div>
         
         <div id="max-indiv-3ptm">
@@ -49,6 +58,11 @@
               <p>Season: <input name="season" value=""> </p>
               <p><input type="submit"></p>
           </form>
+          <br>
+          <p style="text-align: center;">
+            This search reveals the exact number of 3-pointers every player made for a given
+            team in a season, and what percentage of the team's 3-pointers that adds up to be.
+          </p>
         </div>
         
 
@@ -74,7 +88,13 @@
               </select>
               </p>
               <p><input type="submit"></p>
-          </form> 
+          </form>
+          <br>
+          <p style="text-align: center;">
+            This query will display the correlation, if any, between a team's total wins
+            and any of their available statistical categories in the selection bar above
+            for the last 20 seasons.
+          </p>
         </div>
         
         <div id="players-by-college">
@@ -100,10 +120,16 @@
               </p>
               <p><input type="submit"></p>
           </form>
+          <br>
+          <p style="text-align: center;">
+            With this search, one can compare the number of active players in the NBA, grouped by
+            their respective college attended. This data will show that number over the course of the
+            most recent 10 seasons.
+          </p>
         </div>
         
         <div id="max-team-3ptm">
-          <h3>Team 3 pointers vs Wins</h3>
+          <h3>Team 3 pointers to Wins</h3>
           <form action = "/three_ptm_wins">
               <p>Minimum wins: <input name="minWins" value=""> </p>
               <p>Season:</p>
@@ -112,6 +138,12 @@
               <p>Limit result: <input name="limit" value="10"> </p>
               <p><input type="submit"></p>
           </form>
+          <br>
+          <p style="text-align: center;">
+            With this complex query, one can attempt to find an insight between teams 
+            of a certain number of wins between specific seasons, and the number of 3 pointers they
+            made during those seasons. 
+          </p>
         </div>
 
         <script>

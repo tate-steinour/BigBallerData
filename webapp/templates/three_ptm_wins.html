@@ -7,7 +7,7 @@
 </head>
 <body style="background-color: antiquewhite;">
 
-<h3 id="title">3ptm Wins</h3>
+<h3 id="title">Team 3ptm to Wins</h3>
 
 
 <div id="container">
@@ -25,7 +25,7 @@
 
     <br>
     <br>
-    <h3>Chart</h3>
+    <h3>NBA Teams Avg 3 Pointers Made to Total Wins</h3>
 
     <div id="chart_div"></div>
 
@@ -36,9 +36,9 @@
 
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-            ['3 Pointers', 'Wins'],
+            ['Wins', '3 Pointers'],
             {% for row in dat %}
-            [ {{row[2]}},  {{row[3]}}],
+            [ {{row[3]}},  {{row[2]}}],
             {% endfor %}
             ]);
 
@@ -46,8 +46,8 @@
                 title: 'Avg. 3 Pointers vs. Total Wins',
                 width: '800',
                 height: '600',
-                hAxis: {title: '3 Pointers', minValue: 10, maxValue: 18},
-                vAxis: {title: 'Wins', minValue: 45, maxValue: 75},
+                hAxis: {title: 'Wins', minValue: 45, maxValue: 75},
+                vAxis: {title: '3 Pointers', minValue: 10, maxValue: 18},
                 legend: 'none',
                 'colors': ['#6a2c70']
             };
